@@ -5,13 +5,18 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+
+    public float OriginalCastleHealth;
+
     //Create gameobjects to hold the three types of enemies we will be instantiating.
     public GameObject enemy;
 
-    private Transform position;
+    private Vector3 TempPosition; 
 
     //Wave Timer for counting down the 2 minutes inbetween waves.
-    private float WTimer = 7200;
+    public float WTimer = 10;
+
+    private float originalWTimer;
 
     //Set up WaveNumber we are on.
     //Initially Wave Number is set to zero at start because we wait two minutes before the first wave.
@@ -21,24 +26,23 @@ public class GameManager : MonoBehaviour
     private int NumberEnemiesToSpawn = 0;
 
     //Set up private int value for the current number of enemies we have spawned.
-    private int NumberEnemiesCurrentlySpawned = 1;
+    private int NumberEnemiesCurrentlySpawned = 0;
 
+    public enum WaveState
+    {
+        Resting,
+        WaveStart,
+        Spawning,
+        WaveEnd,
+        None
+    };
+    
+    [SerializeField] private WaveState waveState;
+
+    public int SpawnCap = 40;
     //Creates a new event.
     public UnityEvent m_Death = new UnityEvent();
     public UnityEvent m_Messages = new UnityEvent();
-
-    void Start()
-    {
-
-        //Invoke the Spawner
-        InvokeRepeating ("Wave", WTimer, WTimer);
-
-        //Listeners for generic functions
-        m_Death.AddListener(MyAction);
-        m_Messages.AddListener(MyMessages);
-
-    }
-
 
     //The private float value of scrap parts the player collects to fix things.
     private float ScrapCount;
@@ -70,7 +74,95 @@ public class GameManager : MonoBehaviour
     //The public float value which gets the private float value of PlayerHealth.
     public float CstlHealth { get { return CastleHealth; } }
 
+    void Start()
+    {
+        //Listeners for generic functions
+        m_Death.AddListener(MyAction);
+        m_Messages.AddListener(MyMessages);
+
+        waveState = WaveState.Resting;
+        WaveNumber = 20;
+        originalWTimer = WTimer;
+
+        CastleHealth = OriginalCastleHealth;
+    }
+
+
+    void Update() 
+    {
+        StateChanger();
+    }
+
 //-------------------------------------------------------------------------------------
+
+    void StateChanger()
+    {
+        switch (waveState)
+        {
+            case WaveState.Resting:
+                StateResting();
+                break;
+
+            case WaveState.WaveStart:
+                StaeWaveStart();
+                break;
+
+            case WaveState.Spawning:
+                SateSpawning();
+                break;
+
+            case WaveState.WaveEnd:
+                SateWaveEnd();
+                break;
+        }
+    }
+
+    void StateResting()
+    {
+        WTimer -= Time.deltaTime;
+
+        if(WTimer < 0)
+        {
+            waveState = WaveState.WaveStart;
+            WTimer = originalWTimer;
+        }
+    }
+
+    void StaeWaveStart()
+    {
+        // 
+        NumberEnemiesToSpawn = WaveNumber * 4 + 2;
+        waveState = WaveState.Spawning;
+    }
+
+    void SateSpawning()
+    {
+        Spawn();
+    }
+
+    void SateWaveEnd()
+    {
+        WaveNumber++;
+
+        waveState = WaveState.Resting;
+    }
+
+    void Spawn()
+    {
+        while(NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
+        {            
+            TempPosition  = new Vector3(Random.Range(-100.0f, 100.0f), 0, -Mathf.Cos(Random.Range(-100.0f, 100.0f)));
+
+            Instantiate (enemy, TempPosition, Quaternion.identity);
+            NumberEnemiesCurrentlySpawned++;
+            NumberEnemiesToSpawn--;
+        }
+
+        if(NumberEnemiesCurrentlySpawned <= 0)
+        {
+            waveState = WaveState.WaveEnd;
+        }
+    }
 
     void MyAction()
     {
@@ -95,30 +187,23 @@ public class GameManager : MonoBehaviour
         ScrapCount -= Num;
     }
 
-    public void Wave()
+    public void OnAIDeath()
     {
-            //work on all spawning enemies and waves here.
-
-            //Increase the number of the wave we are currently on.
-            WaveNumber+=1;
-
-            //calculate the new number of Enemies to spawn based on the algorthym provided by Brandon, Eric, and Justin.
-            NumberEnemiesToSpawn = WaveNumber * 4 + 2;
-
-            position.position = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
-
-            //Spawn the enemy using the calculations we have just done.
-            while(NumberEnemiesCurrentlySpawned <= NumberEnemiesToSpawn){
-                Instantiate (enemy, position);
-                NumberEnemiesCurrentlySpawned += 1;
-            }
-            
-            NumberEnemiesCurrentlySpawned = 1;
-
+        NumberEnemiesCurrentlySpawned--;
     }
 
+    public void PlayerDamageTaken(float num)
+    {
+        PlayerHealth -= num;
+    }
 
+        public void CastleHealthRestored(float num)
+    {
+        CastleHealth += num;
+    }
 
-
-
+        public void CastleDamageTaken(float num)
+    {
+        CastleHealth -= num;
+    }
 }
