@@ -1004,8 +1004,8 @@ GameObject:
   - component: {fileID: 1128771623}
   - component: {fileID: 1128771622}
   - component: {fileID: 1128771621}
-  - component: {fileID: 1128771624}
   - component: {fileID: 1128771620}
+  - component: {fileID: 1128771624}
   m_Layer: 0
   m_Name: Scrap
   m_TagString: Untagged
