@@ -115,6 +115,7 @@ MonoBehaviour:
   speed: 6
   jumpSpeed: 8
   gravity: 20
+  speedBoost: 2
 --- !u!1 &4898042770346527260
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivivty: 3
-  Xmax: 30
-  Xmin: -30
+  Xmax: 10
+  Xmin: -10
   speed: 100
   maxAngle: 20

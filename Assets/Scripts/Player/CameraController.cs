@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [Range(0.5f, 3f)] public float mouseSensitivivty = 1.5f;
+    [Range(0.5f, 3f)] public float mouseSensitivity = 1.5f;
     public float Xmax = 30.0f;
     public float Xmin = -30.0f;
     public float speed = 100f;
@@ -31,8 +31,8 @@ public class CameraController : MonoBehaviour
         float MouseX = Input.GetAxis("Mouse X");
         float MouseY = Input.GetAxis("Mouse Y");;
 
-        float rotAmountX = MouseX * mouseSensitivivty;
-        float rotAmountY = MouseY * mouseSensitivivty;
+        float rotAmountX = MouseX * mouseSensitivity;
+        float rotAmountY = MouseY * mouseSensitivity;
 
         xAxisClamp -= rotAmountY;
 
