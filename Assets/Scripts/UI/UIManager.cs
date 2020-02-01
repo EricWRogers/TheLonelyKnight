@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Scrape")]
     public TMP_Text scrapeText;
+    private float scrapeAmount = 0f;
 
     [Header("Waves")]
     public GameObject wavePanel;
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
     private float prevCastleHealth = 100f;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,20 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.PlyrHealth != prevPlayerHealth)
+        {
+            PlayerHealthBar(GameManager.Instance.PlyrHealth);
+        }
+
+        if (GameManager.Instance.CstlHealth != prevCastleHealth)
+        {
+            CastleHealthBar(GameManager.Instance.CstlHealth);
+        }
+        if (GameManager.Instance.scrpcont != scrapeAmount)
+        {
+            scrapeAmount = GameManager.Instance.scrpcont;
+            scrapeText.text = "" + scrapeAmount;
+        }
 
     }
 
@@ -55,7 +71,7 @@ public class UIManager : MonoBehaviour
             playerHealthBarAnim.SetBool("Play", false);
         }
         prevPlayerHealth = health;
-        
+
         if (health > 67)
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
@@ -98,7 +114,7 @@ public class UIManager : MonoBehaviour
     public void CastleHealthBar(float health)
     {
         int avaibleBars = (int)(health / 6.25f);
-        
+
         if (health < prevCastleHealth)
         {
             castleHealthBarAnim.SetBool("Play", true);
@@ -108,7 +124,7 @@ public class UIManager : MonoBehaviour
             castleHealthBarAnim.SetBool("Play", false);
         }
         prevCastleHealth = health;
-        
+
         if (health > 67)
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
@@ -147,5 +163,12 @@ public class UIManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void ToastPopUp(float scrapeAmount, string buttonToPress)
+    {
+        scrapeRequiredText.text = "" + scrapeAmount;
+        instructionText.text = "Press " + buttonToPress + " to upgrade";
+        toastOB.SetActive(true);
     }
 }
