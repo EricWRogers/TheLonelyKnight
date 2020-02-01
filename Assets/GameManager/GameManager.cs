@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public float OriginalCastleHealth;
 
+    public Transform center;
+
     //Create gameobjects to hold the three types of enemies we will be instantiating.
     public GameObject enemy;
 
@@ -151,7 +153,7 @@ public class GameManager : MonoBehaviour
     {
         while(NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
         {            
-            TempPosition  = new Vector3(Random.Range(-100.0f, 100.0f), 0, -Mathf.Cos(Random.Range(-100.0f, 100.0f)));
+            TempPosition  = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
 
             Instantiate (enemy, TempPosition, Quaternion.identity);
             NumberEnemiesCurrentlySpawned++;
