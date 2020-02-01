@@ -14,7 +14,8 @@ public class EnemyHealth : MonoBehaviour
     ParticleSystem hitParticles;                
     public CapsuleCollider capsuleCollider;  
     public Rigidbody rigidbody;   
-    public Prefab Scrap;
+    public GameObject Scrap;
+    GameManager gameManager;
          
     bool isDead;                               
     bool isSinking;
@@ -55,8 +56,6 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage (int amount)
     {
-        // If the enemy is dead...
-
         currentHealth -= amount;
 
         if(currentHealth <= 0)
@@ -70,8 +69,7 @@ public class EnemyHealth : MonoBehaviour
     void Death ()
     {
         Instantiate(Scrap,this.transform);
-
-        GameManager.OnAIDeath();
+        gameManager.OnAIDeath();
         capsuleCollider.isTrigger = true;
         // The enemy is dead.
         isDead = true;

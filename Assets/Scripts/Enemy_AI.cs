@@ -91,11 +91,12 @@ public class Enemy_AI : MonoBehaviour
             attackDamage = 30;
             BlowUp();
         }
-    /*     if(gameManager.playerHealth.currentHealth > 0)
+
+        if(gameManager.playerHealth > 0)
         {
-            // ... damage the player.
-            gameManager.playerHealth.TakeDamage (attackDamage);
-        } */
+           
+            gameManager.PlayerDamageTaken(attackDamage);
+        } 
     }
     void Flee()
     {
