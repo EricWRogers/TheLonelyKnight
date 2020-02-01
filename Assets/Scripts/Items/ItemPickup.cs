@@ -15,12 +15,8 @@ public class ItemPickup : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            // Need to add function to gameManager to display a message to player. "Press F to Collect"
-            if(Input.GetButton("Interact"))
-            {
-                // Need to add function to gameManager to add scrap and display on screen.
-                Destroy(gameObject);
-            }
+            GameManagerGO.AddScrapToCount((int)Random.Range(2f, 5f));
+            Destroy(gameObject);
         }
     }
 }
