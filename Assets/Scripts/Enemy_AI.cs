@@ -43,7 +43,8 @@ public class Enemy_AI : MonoBehaviour
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
         if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
         {
-                Attack ();
+            Attack ();
+            
         }
 
 
