@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private WaveState waveState;
 
-    public WaveState WaveState { get { return waveState; } }
+    public WaveState WaveStateHolder { get { return waveState; } }
 
     public int SpawnCap = 40;
     //Creates a new event.
