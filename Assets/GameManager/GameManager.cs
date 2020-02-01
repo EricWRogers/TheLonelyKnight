@@ -59,11 +59,13 @@ public class GameManager : MonoBehaviour
         //handle all the messages in the game here.
     }
 
+    //Function called by other scripts to increase the value of ScrapCount.
     public void AddScrapToCount(float Num)
     {
         ScrapCount += Num;
     }
 
+    //Function called by other scripts to decrease the value of ScrapCount.
     public void SubtractScrapFromCount(float Num)
     {
         ScrapCount -= Num;
