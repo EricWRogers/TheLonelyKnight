@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
 
     //Set up WaveNumber we are on.
     //Initially Wave Number is set to zero at start because we wait two minutes before the first wave.
-    private int WaveNumber = 0;
+    private int waveNumber = 0;
+
+    public int WaveNumber { get { return waveNumber; } }
 
     //Set up int for the number of enemies we are spawning.
     private int NumberEnemiesToSpawn = 0;
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
     };
 
     [SerializeField] private WaveState waveState;
+
+    public WaveState WaveState { get { return waveState; } }
 
     public int SpawnCap = 40;
     //Creates a new event.
@@ -82,7 +86,9 @@ public class GameManager : MonoBehaviour
 
     //The public float value which gets the private float value of PlayerHealth.
     public float CstlHealth { get { return CastleHealth; } }
+
     public static GameManager Instance { get; private set; } = null;
+
     private void Awake()
     {
         if (Instance == null)
@@ -103,7 +109,7 @@ public class GameManager : MonoBehaviour
         m_Messages.AddListener(MyMessages);
 
         waveState = WaveState.Resting;
-        WaveNumber = 20;
+        waveNumber = 20;
         originalWTimer = WTimer;
 
         CastleHealth = OriginalCastleHealth;
@@ -155,7 +161,7 @@ public class GameManager : MonoBehaviour
     void StaeWaveStart()
     {
 
-        NumberEnemiesToSpawn = WaveNumber * 4 + 2;
+        NumberEnemiesToSpawn = waveNumber * 4 + 2;
         waveState = WaveState.Spawning;
     }
 
@@ -166,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     void SateWaveEnd()
     {
-        WaveNumber++;
+        waveNumber++;
 
         waveState = WaveState.Resting;
     }
