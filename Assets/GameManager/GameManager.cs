@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public float PlyrHealth { get { return PlayerHealth; } }
 
     //The public float value which gets the private float value of PlayerHealth.
-    public float CstlHealth { get { return CastleHealth; } } }
+    public float CstlHealth { get { return CastleHealth; } }
 
 //-------------------------------------------------------------------------------------
 
