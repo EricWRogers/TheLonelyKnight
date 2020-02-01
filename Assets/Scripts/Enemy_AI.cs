@@ -92,7 +92,7 @@ public class Enemy_AI : MonoBehaviour
             BlowUp();
         }
 
-        if(gameManager.playerHealth > 0)
+        if(gameManager.PlyrHealth > 0)
         {
            
             gameManager.PlayerDamageTaken(attackDamage);
