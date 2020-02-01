@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     private float CastleHealth;
 
     //The public float value which gets the private float value of ScrapCount.
-    public float scrpcont { get { return ScrapCount; } }
+    public float scrpcont { get { return ScrapCount; }}
 
     //The public float value which gets the private float value of Turrets 1-4.
     public float turr1 { get { return Turret1; } }
@@ -59,6 +59,15 @@ public class GameManager : MonoBehaviour
         //handle all the messages in the game here.
     }
 
+    public void AddScrapToCount(float Num)
+    {
+        ScrapCount += Num;
+    }
+
+    public void SubtractScrapFromCount(float Num)
+    {
+        ScrapCount -= Num;
+    }
 
 
 
