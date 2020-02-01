@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Enemy_AI_Script : MonoBehaviour
 {
     Transform player;                
     EnemyHealth enemyHealth;        
-    UnityEngine.AI.NavMeshAgent nav;               
-
+    NavMeshAgent nav;   
 
     void Awake ()
     {
         player = GameObject.FindGameObjectWithTag ("Player").transform;
         enemyHealth = GetComponent <EnemyHealth> ();
-        nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
+        nav = GetComponent <NavMeshAgent> ();
+
     }
 
 
@@ -27,6 +27,7 @@ public class Enemy_AI_Script : MonoBehaviour
      
         else
         {
+ 
             nav.enabled = false;
         }
         
