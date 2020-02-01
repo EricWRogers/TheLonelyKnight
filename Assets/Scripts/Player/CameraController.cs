@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [Range(0.5f, 3f)] public float mouseSensitivity = 1.5f;
+    [Range(1f, 7f)] public float mouseSensitivity = 1.5f;
     public float Xmax = 30.0f;
     public float Xmin = -30.0f;
     public float speed = 100f;

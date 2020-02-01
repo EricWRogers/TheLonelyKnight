@@ -34,9 +34,6 @@ public class GameManager : MonoBehaviour
     //The public float value which gets the private float value of PlayerHealth.
     public float CstlHealth { get { return CastleHealth; } }
 
-
-
-
-
-
+    //The public Instance that allows other scripts to accesses the Game Manager.
+    public static GameManager Instance { get; private set; } = null;
 }

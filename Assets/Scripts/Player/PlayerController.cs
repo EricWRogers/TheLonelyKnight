@@ -97,4 +97,20 @@ public class PlayerController : MonoBehaviour
             speed = originalSpeed;
         }
     }
+
+    void FireWeapon()
+    {
+        if(Input.GetButton("Shoot"))
+        {
+
+        }
+    }
+
+    void UseShield()
+    {
+        if(Input.GetButton("Shield"))
+        {
+
+        }
+    }
 }
