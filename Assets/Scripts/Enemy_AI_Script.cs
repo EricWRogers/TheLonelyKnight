@@ -12,7 +12,7 @@ public class Enemy_AI_Script : MonoBehaviour
     void Awake ()
     {
         player = GameObject.FindGameObjectWithTag ("Player").transform;
-       // enemyHealth = GetComponent <EnemyHealth> ();
+        enemyHealth = GetComponent <EnemyHealth> ();
         nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
     }
 
