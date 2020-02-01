@@ -7,12 +7,13 @@ public class PlayerController : MonoBehaviour
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
+    public float speedBoost = 2f;
 
-    float originalSpeed;
-    float gravityHolder;
+    float originalSpeed = 0f;
+    float gravityHolder = 0f;
 
     Vector3 moveDirection = Vector3.zero;
-    Vector3 playerSize;
+    Vector3 playerSize = Vector3.zero;
 
     CharacterController characterController;
 
@@ -31,11 +32,8 @@ public class PlayerController : MonoBehaviour
         {
             Crouching();
             Movement();
-
-            if (Input.GetButton("Jump"))
-            {
-                moveDirection.y = jumpSpeed;
-            }
+            Jump();
+            Sprinting();
         }
 
         moveDirection.y -= gravity * Time.deltaTime;
@@ -44,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     void Crouching()
     {
-        if(Input.GetButton("Crouch"))
+        if(Input.GetButton("Crouch") && Input.GetButton("Jump") == false)
         {
             gravity = gravityHolder * 10f; 
             Vector3 sizeHolder = playerSize;
@@ -62,10 +60,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Jump()
+    {
+        if (Input.GetButton("Jump") && Input.GetButton("Crouch") == false && Input.GetButton("Sprint") == false)
+        {
+            moveDirection.y = jumpSpeed;
+        }
+    }
+
     void Movement()
     {
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection = moveDirection * speed;
+    }
+
+    void Sprinting()
+    {
+        if (Input.GetButton("Sprint") && Input.GetButton("Crouch") == false && Input.GetButton("Jump") == false)
+        {
+            speed = originalSpeed * speedBoost;
+        }
+        else if(speed != originalSpeed)
+        {
+            speed = originalSpeed;
+        }
     }
 }
