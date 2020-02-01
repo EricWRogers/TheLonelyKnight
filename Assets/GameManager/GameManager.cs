@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     //Create gameobjects to hold the three types of enemies we will be instantiating.
     public GameObject enemy;
 
+    private Transform position;
+
     //Wave Timer for counting down the 2 minutes inbetween waves.
     private float WTimer = 7200;
 
@@ -103,9 +105,11 @@ public class GameManager : MonoBehaviour
             //calculate the new number of Enemies to spawn based on the algorthym provided by Brandon, Eric, and Justin.
             NumberEnemiesToSpawn = WaveNumber * 4 + 2;
 
+            position.position = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
+
             //Spawn the enemy using the calculations we have just done.
             while(NumberEnemiesCurrentlySpawned <= NumberEnemiesToSpawn){
-                Instantiate (enemy, Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
+                Instantiate (enemy, position);
                 NumberEnemiesCurrentlySpawned += 1;
             }
             
