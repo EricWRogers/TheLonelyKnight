@@ -53,6 +53,13 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void AddScrapToCount(float Num)
+    {
+        ScrapCount += Num;
+    }
 
-
+    public void SubtractScrapFromCount(float Num)
+    {
+        ScrapCount -= Num;
+    }
 }
