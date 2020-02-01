@@ -838,23 +838,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 989284064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f821d905218b7d40a2e8b14d53ec310, type: 3}
+  m_Script: {fileID: 11500000, guid: 013de72ba1da9ca48becf9579fa9da28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Death:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &989284066
 Transform:
   m_ObjectHideFlags: 0
@@ -1004,8 +990,8 @@ GameObject:
   - component: {fileID: 1128771623}
   - component: {fileID: 1128771622}
   - component: {fileID: 1128771621}
-  - component: {fileID: 1128771620}
   - component: {fileID: 1128771624}
+  - component: {fileID: 1128771620}
   m_Layer: 0
   m_Name: Scrap
   m_TagString: Untagged

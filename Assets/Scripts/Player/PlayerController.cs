@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     Vector3 originalPlayerSize = Vector3.zero;
 
-    CharacterController characterController;
+    CharacterController characterControllerGO;
+    RaycastHit hit;
 
     void Start()
     {
@@ -24,24 +25,25 @@ public class PlayerController : MonoBehaviour
         originalGravity = gravity;
         originalSpeed = speed;
 
-        // Get some values form the Character Controller.
-        characterController = GetComponent<CharacterController>();
+        // Get values form the Character Controller.
+        characterControllerGO = GetComponent<CharacterController>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Only need to update is the player is on the ground.
-        if (characterController.isGrounded)
+        if (characterControllerGO.isGrounded)
         {
             Crouching();
             Movement();
             Jump();
             Sprinting();
+            FireWeapon();
         }
 
         // Needed to apply moveDirection to the characterController.
         moveDirection.y -= gravity * Time.deltaTime;
-        characterController.Move(moveDirection * Time.deltaTime);
+        characterControllerGO.Move(moveDirection * Time.deltaTime);
     }
 
     void Crouching()
@@ -102,7 +104,17 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetButton("Shoot"))
         {
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
+            if (Physics.Raycast(transform.position, fwd, out hit, 10))
+            {
+                print(hit.transform.tag);
+
+                if(hit.transform.tag == "Enemy")
+                {
+                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(25);
+                }
+            }
         }
     }
 
@@ -110,7 +122,7 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetButton("Shield"))
         {
-
+            
         }
     }
 }
