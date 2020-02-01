@@ -5390,7 +5390,7 @@ PrefabInstance:
     - target: {fileID: 4898042770346527248, guid: a5559e2c86414d34db6f94facdba1926,
         type: 3}
       propertyPath: m_Antialiasing
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4898042770346527248, guid: a5559e2c86414d34db6f94facdba1926,
         type: 3}
