@@ -208,4 +208,49 @@ public class GameManager : MonoBehaviour
     {
         CastleHealth -= num;
     }
+
+    
+    public void TurrentHealthAdd(int turrentnumber, float num) 
+    {
+         switch (turrentnumber)
+        {
+            case 1:
+                Turret1 += num;
+                break;
+
+            case 2:
+                Turret2 += num;
+                break;
+
+            case 3:
+                Turret3 += num;
+                break;
+
+            case 4:
+                Turret4 += num;
+                break;
+        }
+    }
+
+        public void TurrentHealthSubtract(int turrentnumber, float num) 
+    {
+         switch (turrentnumber)
+        {
+            case 1:
+                Turret1 -= num;
+                break;
+
+            case 2:
+                Turret2 -= num;
+                break;
+
+            case 3:
+                Turret3 -= num;
+                break;
+
+            case 4:
+                Turret4 -= num;
+                break;
+        }
+    }
 }
