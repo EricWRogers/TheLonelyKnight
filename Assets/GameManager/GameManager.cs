@@ -11,9 +11,13 @@ public class GameManager : MonoBehaviour
     public Transform center;
 
     //Create gameobjects to hold the three types of enemies we will be instantiating.
-    public GameObject enemy;
+    public GameObject enemy, enemy2, enemy3;
 
-    private Vector3 TempPosition; 
+    private bool plyrHurt;
+
+    private int RndEnemy;
+
+    private Vector3 TempPosition;
 
     //Wave Timer for counting down the 2 minutes inbetween waves.
     public float WTimer = 10;
@@ -38,7 +42,7 @@ public class GameManager : MonoBehaviour
         WaveEnd,
         None
     };
-    
+
     [SerializeField] private WaveState waveState;
 
     public int SpawnCap = 40;
@@ -55,6 +59,9 @@ public class GameManager : MonoBehaviour
     private float Turret3;
     private float Turret4;
 
+    private float OrigWaitedTime = 10;
+    private float WaitedTimer = 0;
+
     //The private float value of player's health.
     private float PlayerHealth;
 
@@ -62,7 +69,7 @@ public class GameManager : MonoBehaviour
     private float CastleHealth;
 
     //The public float value which gets the private float value of ScrapCount.
-    public float scrpcont { get { return ScrapCount; }}
+    public float scrpcont { get { return ScrapCount; } }
 
     //The public float value which gets the private float value of Turrets 1-4.
     public float turr1 { get { return Turret1; } }
@@ -75,6 +82,19 @@ public class GameManager : MonoBehaviour
 
     //The public float value which gets the private float value of PlayerHealth.
     public float CstlHealth { get { return CastleHealth; } }
+    public static GameManager Instance { get; private set; } = null;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Start()
     {
@@ -87,15 +107,17 @@ public class GameManager : MonoBehaviour
         originalWTimer = WTimer;
 
         CastleHealth = OriginalCastleHealth;
+        WaitedTimer = OrigWaitedTime;
     }
 
 
-    void Update() 
+    void Update()
     {
         StateChanger();
+        PlayerWaitedRestore();
     }
 
-//-------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------
 
     void StateChanger()
     {
@@ -123,7 +145,7 @@ public class GameManager : MonoBehaviour
     {
         WTimer -= Time.deltaTime;
 
-        if(WTimer < 0)
+        if (WTimer < 0)
         {
             waveState = WaveState.WaveStart;
             WTimer = originalWTimer;
@@ -132,7 +154,7 @@ public class GameManager : MonoBehaviour
 
     void StaeWaveStart()
     {
-        // 
+
         NumberEnemiesToSpawn = WaveNumber * 4 + 2;
         waveState = WaveState.Spawning;
     }
@@ -151,16 +173,34 @@ public class GameManager : MonoBehaviour
 
     void Spawn()
     {
-        while(NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
-        {            
-            TempPosition  = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+        while (NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
+        {
+            TempPosition = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
 
-            Instantiate (enemy, TempPosition, Quaternion.identity);
+            RndEnemy = (int)Random.Range(1, 3);
+
+            switch (RndEnemy)
+            {
+                case 1:
+                    Instantiate(enemy, TempPosition, Quaternion.identity);
+                    break;
+
+                case 2:
+                    Instantiate(enemy2, TempPosition, Quaternion.identity);
+                    break;
+
+                case 3:
+                    Instantiate(enemy3, TempPosition, Quaternion.identity);
+                    break;
+
+            }
+
+            Instantiate(enemy, TempPosition, Quaternion.identity);
             NumberEnemiesCurrentlySpawned++;
             NumberEnemiesToSpawn--;
         }
 
-        if(NumberEnemiesCurrentlySpawned <= 0)
+        if (NumberEnemiesCurrentlySpawned <= 0)
         {
             waveState = WaveState.WaveEnd;
         }
@@ -197,15 +237,78 @@ public class GameManager : MonoBehaviour
     public void PlayerDamageTaken(float num)
     {
         PlayerHealth -= num;
+        plyrHurt = true;
     }
 
-        public void CastleHealthRestored(float num)
+    void PlayerWaitedRestore()
+    {
+        WaitedTimer -= Time.deltaTime;
+
+
+        if (plyrHurt == true)
+        {
+            WTimer = originalWTimer;
+        }
+
+        if (WaitedTimer < 0)
+        {
+            PlayerHealth += 0.5f;
+        }
+
+    }
+
+    public void CastleHealthRestored(float num)
     {
         CastleHealth += num;
     }
 
-        public void CastleDamageTaken(float num)
+    public void CastleDamageTaken(float num)
     {
         CastleHealth -= num;
+    }
+
+
+    public void TurrentHealthAdd(int turrentnumber, float num)
+    {
+        switch (turrentnumber)
+        {
+            case 1:
+                Turret1 += num;
+                break;
+
+            case 2:
+                Turret2 += num;
+                break;
+
+            case 3:
+                Turret3 += num;
+                break;
+
+            case 4:
+                Turret4 += num;
+                break;
+        }
+    }
+
+    public void TurrentHealthSubtract(int turrentnumber, float num)
+    {
+        switch (turrentnumber)
+        {
+            case 1:
+                Turret1 -= num;
+                break;
+
+            case 2:
+                Turret2 -= num;
+                break;
+
+            case 3:
+                Turret3 -= num;
+                break;
+
+            case 4:
+                Turret4 -= num;
+                break;
+        }
     }
 }
