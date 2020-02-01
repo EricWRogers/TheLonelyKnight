@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     private int RndEnemy;
 
-    private Vector3 TempPosition;
+    private Vector3 TempPosition, TempPositionTwo, TempPositionThree;
 
     //Wave Timer for counting down the 2 minutes inbetween waves.
     public float WTimer = 10;
@@ -175,27 +175,33 @@ public class GameManager : MonoBehaviour
     {
         while (NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
         {
-            TempPosition = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+            
 
-            RndEnemy = (int)Random.Range(1, 3);
+            RndEnemy = Random.Range(1, 4);
+            Debug.Log(RndEnemy);
 
             switch (RndEnemy)
             {
                 case 1:
+                    TempPosition = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
                     Instantiate(enemy, TempPosition, Quaternion.identity);
                     break;
 
                 case 2:
-                    Instantiate(enemy2, TempPosition, Quaternion.identity);
+                    TempPositionTwo = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+                    Instantiate(enemy2, TempPositionTwo, Quaternion.identity);
                     break;
 
                 case 3:
-                    Instantiate(enemy3, TempPosition, Quaternion.identity);
+                    TempPositionThree = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+                    Instantiate(enemy3, TempPositionThree, Quaternion.identity);
                     break;
+                default:
+                break;
 
             }
 
-            Instantiate(enemy, TempPosition, Quaternion.identity);
+            //Instantiate(enemy, TempPosition, Quaternion.identity);
             NumberEnemiesCurrentlySpawned++;
             NumberEnemiesToSpawn--;
         }
@@ -229,17 +235,20 @@ public class GameManager : MonoBehaviour
         ScrapCount -= Num;
     }
 
+    //Decrease the value of enemies currently spawned.
     public void OnAIDeath()
     {
         NumberEnemiesCurrentlySpawned--;
     }
 
+    //Player takes damage function.
     public void PlayerDamageTaken(float num)
     {
         PlayerHealth -= num;
         plyrHurt = true;
     }
 
+    //A function to alot a certain time after the player hasn't gotten hurt to begin to heal and gain health.
     void PlayerWaitedRestore()
     {
         WaitedTimer -= Time.deltaTime;
@@ -257,17 +266,20 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Restoring castle health.
     public void CastleHealthRestored(float num)
     {
         CastleHealth += num;
     }
 
+    //Decrease castle health.
     public void CastleDamageTaken(float num)
     {
         CastleHealth -= num;
     }
 
 
+    //Turrent Health restoration.
     public void TurrentHealthAdd(int turrentnumber, float num)
     {
         switch (turrentnumber)
@@ -290,6 +302,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Turrent health destruction.
     public void TurrentHealthSubtract(int turrentnumber, float num)
     {
         switch (turrentnumber)
