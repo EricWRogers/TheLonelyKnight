@@ -8,37 +8,42 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;                  
     public float sinkSpeed = 2.5f;              
                 
-    public AudioClip deathClip;       
-      
-
-
+    public AudioClip deathClip;  
     Animator anim;                       
     AudioSource enemyAudio;                   
     ParticleSystem hitParticles;                
-    CapsuleCollider capsuleCollider;            
+    public CapsuleCollider capsuleCollider;  
+    public Rigidbody rigidbody;   
+    public GameObject Scrap;
+    GameManager gameManager;
+         
     bool isDead;                               
-    bool isSinking;                            
+    bool isSinking;
     bool isRising;
 
-    void Awake ()
+    void Start ()
     {
         // Setting up the references.
+        Debug.Log("Starting UP enemy Health");
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
-        hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
-
-        // Setting the current health when the enemy first spawns.
+        rigidbody = GetComponent<Rigidbody>();
         currentHealth = startingHealth;
     }
 
     void Update ()
     {
-        // If the enemy should be sinking...
+        if(currentHealth <= 0)
+        {
+            // ... the enemy is dead.
+            Death ();
+        }
         if(isSinking)
         {
             // ... move the enemy down by the sinkSpeed per second.
             transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
+
         }
         //if the enemy is spawning in
         if(isRising)
@@ -49,20 +54,10 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage (int amount, Vector3 hitPoint)
+    public void TakeDamage (int amount)
     {
-        // If the enemy is dead...
-        if(isDead)
-        {
-            return;
-        }
         currentHealth -= amount;
-        //hitParticles.transform.position = hitPoint;
 
-        // And play the particles.
-        //hitParticles.Play();
-
-        // If the current health is less than or equal to zero...
         if(currentHealth <= 0)
         {
             // ... the enemy is dead.
@@ -73,31 +68,33 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
+        Instantiate(Scrap,this.transform);
+        gameManager.OnAIDeath();
+        capsuleCollider.isTrigger = true;
         // The enemy is dead.
         isDead = true;
-
+        StartSinking();
         // Turn the collider into a trigger so shots can pass through it.
-        capsuleCollider.isTrigger = true;
 
         // Tell the animator that the enemy is dead.
-        anim.SetTrigger ("Dead");
+        //anim.SetTrigger ("Dead");
 
         // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
-        enemyAudio.clip = deathClip;
-        enemyAudio.Play ();
+        //enemyAudio.clip = deathClip;
+        //enemyAudio.Play ();
     }
 
 
     public void StartSinking ()
     {
-        // Find and disable the Nav Mesh Agent.
-        GetComponent <NavMeshAgent> ().enabled = false;
+          // Find and disable the Nav Mesh Agent.
+
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
-        GetComponent <Rigidbody> ().isKinematic = true;
         // The enemy should no sink.
         isSinking = true;
+        Debug.Log("should be sinking");
         // After 2 seconds destory the enemy.
-        Destroy (gameObject, 2f);
+        Destroy (gameObject, 6f);
     }
 }
 
