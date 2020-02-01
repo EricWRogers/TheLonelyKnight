@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour
 
     //Creates a new event.
     public UnityEvent m_Death = new UnityEvent();
+    public UnityEvent m_Messages = new UnityEvent();
 
     void Start()
     {
         m_Death.AddListener(MyAction);
+        m_Messages.AddListener(MyMessages);
     }
 
     //The private float value of scrap parts the player collects to fix things.
@@ -39,10 +41,10 @@ public class GameManager : MonoBehaviour
     public float turr4 { get { return Turret4; } }
 
     //The public float value which gets the private float value of PlayerHealth.
-    public float PlyrHealth { get { return PlayerHealth; if(PlayerHealth == 0){m_Death.Invoke();}} }
+    public float PlyrHealth { get { return PlayerHealth;} }
 
     //The public float value which gets the private float value of PlayerHealth.
-    public float CstlHealth { get { return CastleHealth; if(CastleHealth == 0){m_Death.Invoke();} } }
+    public float CstlHealth { get { return CastleHealth;} }
 
 //-------------------------------------------------------------------------------------
 
@@ -50,6 +52,11 @@ public class GameManager : MonoBehaviour
     {
         //Handle the death screen popup here.
 
+    }
+
+    void MyMessages()
+    {
+        //Handle all message screen popups here.
     }
 
 
