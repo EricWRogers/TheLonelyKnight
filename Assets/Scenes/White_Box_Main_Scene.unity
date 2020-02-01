@@ -1352,6 +1352,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 851579443, guid: 17503f2f94610d74b82ffe5a9bf46ab3, type: 3}
+      propertyPath: m_Speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 851579443, guid: 17503f2f94610d74b82ffe5a9bf46ab3, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451519072715031551, guid: 17503f2f94610d74b82ffe5a9bf46ab3,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451519072715031551, guid: 17503f2f94610d74b82ffe5a9bf46ab3,
+        type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3046534257615844809, guid: 17503f2f94610d74b82ffe5a9bf46ab3,
         type: 3}
       propertyPath: m_Name
@@ -1411,6 +1429,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187300224688990837, guid: 17503f2f94610d74b82ffe5a9bf46ab3,
+        type: 3}
+      propertyPath: startingHealth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063485123870242899, guid: 17503f2f94610d74b82ffe5a9bf46ab3,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063485123870242899, guid: 17503f2f94610d74b82ffe5a9bf46ab3,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17503f2f94610d74b82ffe5a9bf46ab3, type: 3}
@@ -1490,10 +1523,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 631490066, guid: aa772bf86159b834a904148d849f91ba, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 631490066, guid: aa772bf86159b834a904148d849f91ba, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5775958043882861163, guid: aa772bf86159b834a904148d849f91ba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.52
+      value: -69.3
       objectReference: {fileID: 0}
     - target: {fileID: 5775958043882861163, guid: aa772bf86159b834a904148d849f91ba,
         type: 3}
@@ -1549,6 +1590,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Suicide_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6056410595262808938, guid: aa772bf86159b834a904148d849f91ba,
+        type: 3}
+      propertyPath: sinkSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6056410595262808938, guid: aa772bf86159b834a904148d849f91ba,
+        type: 3}
+      propertyPath: startingHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402486188815031439, guid: aa772bf86159b834a904148d849f91ba,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402486188815031439, guid: aa772bf86159b834a904148d849f91ba,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402486188815031439, guid: aa772bf86159b834a904148d849f91ba,
+        type: 3}
+      propertyPath: m_Drag
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402486188815031439, guid: aa772bf86159b834a904148d849f91ba,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315061369657299732, guid: aa772bf86159b834a904148d849f91ba,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315061369657299732, guid: aa772bf86159b834a904148d849f91ba,
+        type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa772bf86159b834a904148d849f91ba, type: 3}

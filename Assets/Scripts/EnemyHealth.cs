@@ -8,27 +8,23 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;                  
     public float sinkSpeed = 2.5f;              
                 
-    public AudioClip deathClip;       
-      
-
-
+    public AudioClip deathClip;  
     Animator anim;                       
     AudioSource enemyAudio;                   
     ParticleSystem hitParticles;                
-    CapsuleCollider capsuleCollider;            
+    CapsuleCollider capsuleCollider;  
+    Rigidbody rigidbody;   
+         
     bool isDead;                               
-    bool isSinking;                            
+    bool isSinking;
     bool isRising;
 
-    void Awake ()
+    void Start ()
     {
         // Setting up the references.
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
-        hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
-
-        // Setting the current health when the enemy first spawns.
         currentHealth = startingHealth;
     }
 
@@ -57,12 +53,7 @@ public class EnemyHealth : MonoBehaviour
             return;
         }
         currentHealth -= amount;
-        //hitParticles.transform.position = hitPoint;
 
-        // And play the particles.
-        //hitParticles.Play();
-
-        // If the current health is less than or equal to zero...
         if(currentHealth <= 0)
         {
             // ... the enemy is dead.
@@ -73,12 +64,12 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
+        capsuleCollider.isTrigger = true;
         // The enemy is dead.
         isDead = true;
-
+        StartSinking();
         // Turn the collider into a trigger so shots can pass through it.
-        capsuleCollider.isTrigger = true;
-
+        
         // Tell the animator that the enemy is dead.
         anim.SetTrigger ("Dead");
 
@@ -90,12 +81,15 @@ public class EnemyHealth : MonoBehaviour
 
     public void StartSinking ()
     {
-        // Find and disable the Nav Mesh Agent.
-        GetComponent <NavMeshAgent> ().enabled = false;
+          // Find and disable the Nav Mesh Agent.
+
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
-        GetComponent <Rigidbody> ().isKinematic = true;
+        Destroy(rigidbody);
+        Destroy(gameObject.GetComponent<NavMeshAgent>());
+        Destroy(capsuleCollider);
         // The enemy should no sink.
         isSinking = true;
+
         // After 2 seconds destory the enemy.
         Destroy (gameObject, 2f);
     }

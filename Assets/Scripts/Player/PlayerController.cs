@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDirection = Vector3.zero;
     Vector3 originalPlayerSize = Vector3.zero;
-
     CharacterController characterController;
 
     void Start()
