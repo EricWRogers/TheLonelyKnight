@@ -11,7 +11,11 @@ public class GameManager : MonoBehaviour
     public Transform center;
 
     //Create gameobjects to hold the three types of enemies we will be instantiating.
-    public GameObject enemy;
+    public GameObject enemy, enemy2, enemy3;
+
+    private bool plyrHurt;
+
+    private int RndEnemy;
 
     private Vector3 TempPosition; 
 
@@ -55,6 +59,9 @@ public class GameManager : MonoBehaviour
     private float Turret3;
     private float Turret4;
 
+    private float OrigWaitedTime = 10;
+    private float WaitedTimer = 0;
+
     //The private float value of player's health.
     private float PlayerHealth;
 
@@ -87,12 +94,14 @@ public class GameManager : MonoBehaviour
         originalWTimer = WTimer;
 
         CastleHealth = OriginalCastleHealth;
+        WaitedTimer = OrigWaitedTime;
     }
 
 
     void Update() 
     {
         StateChanger();
+        PlayerWaitedRestore();
     }
 
 //-------------------------------------------------------------------------------------
@@ -132,7 +141,7 @@ public class GameManager : MonoBehaviour
 
     void StaeWaveStart()
     {
-        // 
+
         NumberEnemiesToSpawn = WaveNumber * 4 + 2;
         waveState = WaveState.Spawning;
     }
@@ -154,6 +163,24 @@ public class GameManager : MonoBehaviour
         while(NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
         {            
             TempPosition  = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+        
+            RndEnemy = (int)Random.Range(1,3);
+
+            switch (RndEnemy)
+            {
+                case 1:
+                Instantiate (enemy, TempPosition, Quaternion.identity);
+                    break;
+
+                case 2:
+                Instantiate (enemy2, TempPosition, Quaternion.identity);
+                    break;
+
+                case 3:
+                Instantiate (enemy3, TempPosition, Quaternion.identity);
+                    break;
+
+            }
 
             Instantiate (enemy, TempPosition, Quaternion.identity);
             NumberEnemiesCurrentlySpawned++;
@@ -197,6 +224,23 @@ public class GameManager : MonoBehaviour
     public void PlayerDamageTaken(float num)
     {
         PlayerHealth -= num;
+        plyrHurt = true;
+    }
+
+    void PlayerWaitedRestore()
+    {
+        WaitedTimer -= Time.deltaTime;
+
+        
+        if(plyrHurt == true){
+            WTimer = originalWTimer;
+        }
+
+        if(WaitedTimer < 0)
+        {
+            PlayerHealth += 0.5f;
+        }
+
     }
 
         public void CastleHealthRestored(float num)
@@ -207,5 +251,50 @@ public class GameManager : MonoBehaviour
         public void CastleDamageTaken(float num)
     {
         CastleHealth -= num;
+    }
+
+    
+    public void TurrentHealthAdd(int turrentnumber, float num) 
+    {
+         switch (turrentnumber)
+        {
+            case 1:
+                Turret1 += num;
+                break;
+
+            case 2:
+                Turret2 += num;
+                break;
+
+            case 3:
+                Turret3 += num;
+                break;
+
+            case 4:
+                Turret4 += num;
+                break;
+        }
+    }
+
+        public void TurrentHealthSubtract(int turrentnumber, float num) 
+    {
+         switch (turrentnumber)
+        {
+            case 1:
+                Turret1 -= num;
+                break;
+
+            case 2:
+                Turret2 -= num;
+                break;
+
+            case 3:
+                Turret3 -= num;
+                break;
+
+            case 4:
+                Turret4 -= num;
+                break;
+        }
     }
 }
