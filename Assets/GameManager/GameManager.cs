@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+
+    //Creates a new event.
+    public UnityEvent m_Death = new UnityEvent();
+
+    void Start()
+    {
+        m_Death.AddListener(MyAction);
+    }
+
     //The private float value of scrap parts the player collects to fix things.
     private float ScrapCount;
 
@@ -29,11 +39,20 @@ public class GameManager : MonoBehaviour
     public float turr4 { get { return Turret4; } }
 
     //The public float value which gets the private float value of PlayerHealth.
-    public float PlyrHealth { get { return PlayerHealth; } }
+    public float PlyrHealth { get { return PlayerHealth; if(PlayerHealth == 0){m_Death.Invoke();}} }
 
     //The public float value which gets the private float value of PlayerHealth.
-    public float CstlHealth { get { return CastleHealth; } }
+    public float CstlHealth { get { return CastleHealth; if(CastleHealth == 0){m_Death.Invoke();} } }
 
-    //The public Instance that allows other scripts to accesses the Game Manager.
-    public static GameManager Instance { get; private set; } = null;
+//-------------------------------------------------------------------------------------
+
+    void MyAction()
+    {
+        //Handle the death screen popup here.
+
+    }
+
+
+
+
 }
