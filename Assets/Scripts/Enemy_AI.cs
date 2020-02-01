@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Enemy_AI : MonoBehaviour
 {
     public float timeBetweenAttacks = 0.5f;    
@@ -17,37 +17,51 @@ public class Enemy_AI : MonoBehaviour
     float timer;                                
     float distToPlayer;
     float minDistPlayer;
-
+    float multiplyBy;
+    private Transform startTransform;
+    private NavMeshAgent navAgent;
 
     private void Awake ()
     {
         enemy = this.transform;
+        navAgent = this.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag ("Player");
         enemyHealth = GetComponent<EnemyHealth>();
-        anim = GetComponent <Animator> ();
+        anim = GetComponent <Animator>();
         playerInRange = false;
-
         if(enemyType == 1)
             minDistPlayer = 4f;
         if(enemyType == 2)
             minDistPlayer = 40f;
         if(enemyType == 3)
             minDistPlayer = 3f;
-
     }
     void Update ()
     {
-        // Add the time since Update was last called to the timer.
         timer += Time.deltaTime;
         IsPlayerClose();
-        // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-        if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+        if(enemyHealth.currentHealth > 0)
         {
-            Attack ();
-            
+            if(enemyType == 2 && playerInRange )
+            {
+                Vector3 runTo = enemy.position + ((enemy.position - player.transform.position) * 1); 
+                navAgent.SetDestination(runTo);
+            }
+            else
+            {
+                navAgent.SetDestination (player.transform.position);
+            }
         }
-
-
+        else
+        {
+            navAgent.enabled = false;
+        }
+        // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
+        if(timer >= timeBetweenAttacks && distToPlayer <= minDistPlayer && enemyHealth.currentHealth > 0)
+        {
+            Attack (); 
+        }
+   
     }
     void IsPlayerClose()
     {
@@ -68,7 +82,7 @@ public class Enemy_AI : MonoBehaviour
 
     void BlowUp()
     {
-        //colliderbased explosion
+        //collider based explosion
          enemyHealth.currentHealth -= enemyHealth.currentHealth;
     }
 
@@ -76,7 +90,8 @@ public class Enemy_AI : MonoBehaviour
     {
         timer = 0f;
         if(enemyType == 1)
-        {//based off of the range the enemy and player
+        {
+            //based off of the range the enemy and player
             attackDamage = 10;
         }
 
@@ -91,15 +106,5 @@ public class Enemy_AI : MonoBehaviour
             attackDamage = 30;
             BlowUp();
         }
-
-        if(gameManager.PlyrHealth > 0)
-        {
-           
-            gameManager.PlayerDamageTaken(attackDamage);
-        } 
-    }
-    void Flee()
-    {
-
-    }
+    }  
 }

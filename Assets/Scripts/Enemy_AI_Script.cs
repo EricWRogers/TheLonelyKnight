@@ -20,16 +20,7 @@ public class Enemy_AI_Script : MonoBehaviour
     void Update ()
     {
         
-        if(enemyHealth.currentHealth > 0)
-        {
-            nav.SetDestination (player.position);
-        }
-     
-        else
-        {
- 
-            nav.enabled = false;
-        }
+
         
     } 
 }

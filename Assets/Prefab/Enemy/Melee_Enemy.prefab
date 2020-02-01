@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5487722058387752477}
   - component: {fileID: 5824949872038400519}
   - component: {fileID: 5690885682408246473}
-  - component: {fileID: 464195469756105713}
   - component: {fileID: 1049651436}
   - component: {fileID: 6462691813360817336}
   m_Layer: 0
@@ -128,20 +127,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 40
   currentHealth: 0
-  sinkSpeed: 2.5
+  sinkSpeed: 4
   deathClip: {fileID: 0}
---- !u!114 &464195469756105713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5487722058387752478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 206084f8c1e1b364aa47869248faf761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  capsuleCollider: {fileID: 0}
+  rigidbody: {fileID: 0}
+  Scrap: {fileID: 6224262866203652285, guid: f0525d46a2e48a943af1ae4a4561daba, type: 3}
 --- !u!195 &1049651436
 NavMeshAgent:
   m_ObjectHideFlags: 0
