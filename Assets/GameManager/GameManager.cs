@@ -95,24 +95,6 @@ public class GameManager : MonoBehaviour
     //The private float value of the castle health.
     [SerializeField] private float CastleHealth;
 
-    //The public float value which gets the private float value of ScrapCount.
-    public float scrapCount { get { return ScrapCount; } }
-
-    //The public float value which gets the private float value of PlayerHealth.
-    public float playrHealth { get { return PlayerHealth; } }
-
-    //The public float value which gets the private float value of PlayerHealth.
-    public float castleHealth { get { return CastleHealth; } }
-
-    //Creates a new event.
-    public UnityEvent m_Death = new UnityEvent();
-    public UnityEvent m_Messages = new UnityEvent();
-
-    public UnityEvent m_ResetingUiUpdate = new UnityEvent();
-
-    //Created Instance of the Game Manager.
-    public static GameManager Instance { get; private set; } = null;
-
     //Destroy the instance.
     private void Awake()
     {
