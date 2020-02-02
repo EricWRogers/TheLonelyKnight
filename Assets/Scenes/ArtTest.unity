@@ -1086,31 +1086,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e62602bc4b5c2ba5a3dcde786d78097, type: 3}
---- !u!1 &1144164242 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2185679937017680075, guid: e96cc70b9da1b2948a8f41a4b3b6d17b,
-    type: 3}
-  m_PrefabInstance: {fileID: 7887198522562605068}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1144164244
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144164242}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a61228fdf5b6820ca8843f38d4981010, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1146116510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2616,16 +2591,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1851973229246439912, guid: e96cc70b9da1b2948a8f41a4b3b6d17b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851973229246439912, guid: e96cc70b9da1b2948a8f41a4b3b6d17b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.21464023
-      objectReference: {fileID: 0}
     - target: {fileID: 2185679937017680075, guid: e96cc70b9da1b2948a8f41a4b3b6d17b,
         type: 3}
       propertyPath: m_Name
@@ -2685,21 +2650,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488476170972694610, guid: e96cc70b9da1b2948a8f41a4b3b6d17b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488476170972694610, guid: e96cc70b9da1b2948a8f41a4b3b6d17b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5303602453573004540, guid: e96cc70b9da1b2948a8f41a4b3b6d17b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.895211
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e96cc70b9da1b2948a8f41a4b3b6d17b, type: 3}
