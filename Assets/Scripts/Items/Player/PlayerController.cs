@@ -136,20 +136,22 @@ public class PlayerController : MonoBehaviour
                 {
                     // Display message to player to repair
                     UIManager.Instance.ToastPopUp(scrapRepairCost);
+
                     if (Input.GetButton("Interact"))
                     {
                         GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
-                        hitTower.transform.GetComponent<Tower>().repairTower();
+                        hitTower.transform.parent.GetComponent<Tower>().repairTower();
                     }
                 }
                 else
                 {
                     // Display message to player to Actave
                     UIManager.Instance.ToastPopUp(scrapActaveCost);
+                    
                     if (Input.GetButton("Interact"))
                     {
                         GameManager.Instance.SubtractScrapFromCount(scrapActaveCost);
-                        hitTower.transform.GetComponent<Tower>().repairTower();
+                        hitTower.transform.parent.GetComponent<Tower>().repairTower();
                     }
                 }
             }

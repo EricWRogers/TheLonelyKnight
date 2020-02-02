@@ -18,7 +18,7 @@ public class Turret : MonoBehaviour
 
     private bool GunActive = false;
 
-    private float fireCountdown = 0.0f;
+    public float fireCountdown = 0.0f;
 
     private Transform target;
 
@@ -45,7 +45,10 @@ public class Turret : MonoBehaviour
             LockOnTarget();
             if (fireCountdown <= 0f)
             {
-                Shoot();
+                if(target != null)
+                {
+                    Shoot();
+                }
                 fireCountdown = 1f / fireRate;
             }
             fireCountdown -= Time.deltaTime;
@@ -70,7 +73,7 @@ public class Turret : MonoBehaviour
 		if (nearestEnemy != null && shortestDistance <= range)
 		{
 			target = nearestEnemy.transform;
-			nearestEnemy.transform.GetComponent<EnemyHealth>().TakeDamage(50);
+			//nearestEnemy.transform.GetComponent<EnemyHealth>().TakeDamage(50);
 		} else
 		{
 			target = null;
@@ -93,8 +96,7 @@ public class Turret : MonoBehaviour
     {
 
         GameObject bulletClone =  Instantiate(bullet, bulletHolder.position, bulletHolder.rotation);
-        bulletClone.GetComponent<Rigidbody>().AddForce(bulletClone.transform.right * bulletSpeed, ForceMode.Impulse);
-        BulletScript.Destroy(bullet,3.0f);
+        bulletClone.GetComponent<Rigidbody>().AddForce(bulletClone.transform.forward * bulletSpeed, ForceMode.Impulse);
 
     }
 
