@@ -12,18 +12,15 @@ public class Castle : MonoBehaviour
     {
         if(ifInTrigger)
         {
-            if (Input.GetButton("Interact"))
+            if (Input.GetButtonDown("Interact") && GameManager.Instance.castleHealth < 100)
             {
-                GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
-                RepairCastle();
+                if(GameManager.Instance.scrapCount >= scrapRepairCost)
+                {
+                    GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
+                    GameManager.Instance.RepairCastleHealth();
+                }
             }
         }
-
-    }
-
-    void RepairCastle()
-    {
-        GameManager.Instance.RepairCastleHealth();
     }
 
     void OnTriggerEnter(Collider other) 

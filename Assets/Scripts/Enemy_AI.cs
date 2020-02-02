@@ -86,7 +86,7 @@ public class Enemy_AI : MonoBehaviour
             if(nearbyObject.transform.tag == "Castle")
             {
                 Debug.Log("explosion on castle");
-                GameManager.Instance.CastleDamageTaken(attackDamage);
+                GameManager.Instance.CastleDamageIsHere(attackDamage);
             }
         }
         Explode();
@@ -96,6 +96,12 @@ public class Enemy_AI : MonoBehaviour
     void Explode()
     {
         Instantiate(explosion,this.transform);
+    }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.AddScrapToCount(3);
+        GameManager.Instance.OnAIDeath();
     }
 
 }

@@ -51,7 +51,7 @@ MonoBehaviour:
   center: {fileID: 0}
   enemy: {fileID: 1197349569018641229, guid: 5ebe58fd31579934c9755cc9d48cfac9, type: 3}
   enemy2: {fileID: 1197349569018641229, guid: 5ebe58fd31579934c9755cc9d48cfac9, type: 3}
-  enemy3: {fileID: 6033763206684659961, guid: a11cc1553f3a0014bbb51b143fdb3448, type: 3}
+  enemy3: {fileID: 576365958558687620, guid: 8b2a9bf361df0b74d9196c584044d924, type: 3}
   onDeath:
     m_PersistentCalls:
       m_Calls:

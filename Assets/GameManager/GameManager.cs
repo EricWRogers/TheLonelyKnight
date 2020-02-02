@@ -318,13 +318,11 @@ public class GameManager : MonoBehaviour
     //Castle takes damage function.
     public void CastleDamageIsHere(float num)
     {
-        if(num > CastleHealth)
-        {
-            //GameOver
-            onDeath.Invoke();
+        CastleHealth -= num;
 
-        } else if(CastleHealth > 0){
-            CastleHealth -= num;
+        if(CastleHealth <= 0)
+        {
+            onDeath.Invoke();
         }
     }
 

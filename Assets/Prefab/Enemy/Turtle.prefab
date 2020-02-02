@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2794077635230320990}
   - component: {fileID: 7186682879970211769}
-  - component: {fileID: 7186682879970211763}
   - component: {fileID: 7186682879970211775}
   - component: {fileID: 7186682879970211762}
   - component: {fileID: 7186682879970211773}
   - component: {fileID: 4310762356763127060}
+  - component: {fileID: 1754393276103341974}
   m_Layer: 0
   m_Name: Turtle
   m_TagString: Enemy
@@ -57,20 +57,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &7186682879970211763
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197349569018641229}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: -1
-  m_Mesh: {fileID: 6967016885347324521, guid: 5f1990ecce6641d529ce256c178a37d5, type: 3}
 --- !u!23 &7186682879970211775
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -129,7 +115,7 @@ MonoBehaviour:
   currentHealth: 0
   sinkSpeed: 2.5
   deathClip: {fileID: 0}
-  meshCollider: {fileID: 0}
+  boxCollider: {fileID: 0}
   rigidbody: {fileID: 0}
   Scrap: {fileID: 6224262866203652285, guid: f0525d46a2e48a943af1ae4a4561daba, type: 3}
 --- !u!195 &7186682879970211773
@@ -142,7 +128,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -168,6 +154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 2
   particle: {fileID: 3517893159680650673}
+--- !u!65 &1754393276103341974
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197349569018641229}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1.6672559, z: 2}
+  m_Center: {x: 0, y: 0.16637206, z: 0}
 --- !u!1 &1344133038292262994
 GameObject:
   m_ObjectHideFlags: 0

@@ -206,7 +206,7 @@ public class UIManager : MonoBehaviour
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetActive(true);
+                    castleHealthBarImages[i].SetActive(true);
                 }
             }
 
@@ -223,7 +223,7 @@ public class UIManager : MonoBehaviour
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetActive(true);
+                    castleHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -239,7 +239,7 @@ public class UIManager : MonoBehaviour
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetActive(true);
+                    castleHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -292,6 +292,7 @@ public class UIManager : MonoBehaviour
     }
     public void GameOver()
     {
+        Debug.Log("Gsme Over");
         GameManager.Instance.playerCamera.GetComponent<CameraController>().enabled=false;
         gameOverPanel.SetActive(true);
         UnityEngine.Cursor.lockState = CursorLockMode.None;
