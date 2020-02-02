@@ -57,10 +57,10 @@ public class PlayerController : MonoBehaviour
     void Crouching()
     {
         // If only the Crouch button is being pressed then Crouch.
-        if(Input.GetButton("Crouch") && Input.GetButton("Jump") == false)
+        if (Input.GetButton("Crouch") && Input.GetButton("Jump") == false)
         {
             // Set the player hight to 1/3 of the players original Size.
-            gravity = originalGravity * 10f; 
+            gravity = originalGravity * 10f;
             Vector3 sizeHolder = originalPlayerSize;
             sizeHolder.y /= 3f;
             transform.localScale = sizeHolder;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             speed = originalSpeed * speedBoost;
         }
         // if speed doesn't equal the original speed.
-        else if(speed != originalSpeed)
+        else if (speed != originalSpeed)
         {
             // Then, set speed back to the original.
             speed = originalSpeed;
@@ -110,16 +110,16 @@ public class PlayerController : MonoBehaviour
 
     void FireWeapon()
     {
-        if(Input.GetButton("Shoot"))
+        if (Input.GetButton("Shoot"))
         {
             if (Physics.Raycast(transform.position, forward, out hit, 10))
             {
                 Debug.Log(hit.transform.tag);
 
-                if(hit.transform.tag == "Enemy")
+                if (hit.transform.tag == "Enemy")
                 {
                     hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
-                    
+
                 }
             }
         }
@@ -127,14 +127,15 @@ public class PlayerController : MonoBehaviour
 
     void TowerInteract()
     {
-        if(Physics.Raycast(transform.position, forward, out hitTower, 3))
+        if (Physics.Raycast(transform.position, forward, out hitTower, 3))
         {
-            if(hitTower.transform.tag == "Tower")
+            if (hitTower.transform.tag == "Tower")
             {
-                if(hitTower.transform.GetComponent<Tower>().towerActiveOnStart)
+                if (hitTower.transform.GetComponent<Tower>().towerActiveOnStart)
                 {
                     // Display message to player to repair
-                    if(Input.GetButton("Interact"))
+                    UIManager.Instance.ToastPopUp(scrapRepairCost);
+                    if (Input.GetButton("Interact"))
                     {
                         GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
                         hitTower.transform.GetComponent<Tower>().repairTower();
@@ -143,8 +144,8 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     // Display message to player to Actave
-
-                    if(Input.GetButton("Interact"))
+                    UIManager.Instance.ToastPopUp(scrapActaveCost);
+                    if (Input.GetButton("Interact"))
                     {
                         GameManager.Instance.SubtractScrapFromCount(scrapActaveCost);
                         hitTower.transform.GetComponent<Tower>().repairTower();
@@ -152,33 +153,38 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if(hitTower.transform.tag == "Castle")
+            if (hitTower.transform.tag == "Castle")
             {
                 // Display message to player to repair
-
-                if(Input.GetButton("Interact"))
+                UIManager.Instance.ToastPopUp(scrapRepairCost);
+                if (Input.GetButton("Interact"))
                 {
                     GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
                     // hitTower.transform.GetComponent<Castle>().repairTower();
                 }
+            }
+
+            if (hitTower.transform.tag != "Tower" && hitTower.transform.tag != "Castle")
+            {
+                UIManager.Instance.CloseToastPopUp();
             }
         }
     }
 
     void UseShield()
     {
-        if(Input.GetButton("Shield"))
+        if (Input.GetButton("Shield"))
         {
-            
+
         }
     }
-    
+
     void OnDrawGizmos()
-	{
+    {
         forward = transform.TransformDirection(Vector3.forward) * 20;
         Debug.DrawRay(transform.position, forward, Color.green);
 
         forward = transform.TransformDirection(Vector3.forward) * 3;
         Debug.DrawRay(transform.position, forward, Color.red);
-	}
+    }
 }
