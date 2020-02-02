@@ -1,41 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-public class Enemy_AI : MonoBehaviour
-{
-    //Ai for Bird type 
-    public int attackDamage;
+
+public class Enemy_AI_Turtle : MonoBehaviour
+{  
+    public int attackDamage;       
     Animator anim;          
     Transform enemy;                 
     GameObject player;                                         
     EnemyHealth enemyHealth;                  
     bool playerInRange;                         
     float distToPlayer, minDistPlayer, multiplyBy;
-    private NavMeshAgent navAgent;   
+    private UnityEngine.AI.NavMeshAgent navAgent;   
     GameObject castle;
-    public float radius;
-    public float force;
-    public GameObject explosion;
+    public GameObject particle;
+    
+
+
     private void Awake ()
     {
         
         enemy = this.transform;
-        navAgent = this.GetComponent<NavMeshAgent>();
+        navAgent = this.GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag ("Player");
         castle = GameObject.FindGameObjectWithTag ("Castle");
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator>();
         playerInRange = false;
-        minDistPlayer = 7f;
+        minDistPlayer = 30f;
+
 
     }
     void Update ()
     {
         IsPlayerClose();
         if(enemyHealth.currentHealth > 0)
-        {  
-            navAgent.SetDestination (castle.transform.position);
+        {
+            navAgent.SetDestination (player.transform.position);
         }
         else
         {
@@ -44,9 +45,16 @@ public class Enemy_AI : MonoBehaviour
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
         if(playerInRange && enemyHealth.currentHealth > 0 ) 
         {
-            attackDamage = 30;
-            BlowUp();
+            attackDamage = 15;
+            Shoot();
+            if(distToPlayer <= 7) GameManager.Instance.PlayerDamageTaken(attackDamage);
         }
+        else 
+        {
+            particle.SetActive(false);
+        }
+
+   
     }
     void IsPlayerClose()
     {
@@ -54,34 +62,16 @@ public class Enemy_AI : MonoBehaviour
         if(distToPlayer <= minDistPlayer)
         {
             playerInRange = true;
+           
         }
         else
         {
             playerInRange = false;
         }
     }
-    void BlowUp()
+    void Shoot()
     {
-        //explosion effect here!!
-        Collider[] colliders = Physics.OverlapSphere(transform.position,radius);
-        foreach(Collider nearbyObject in colliders)
-        {
-            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-            if(rb!= null)
-            {
-                rb.AddExplosionForce(force,transform.position,radius);
-            }
-            if(nearbyObject.transform.tag == "Player")
-            {
-                GameManager.Instance.PlayerDamageTaken(attackDamage);
-            }
-        }
-        Explode();
-        enemyHealth.TakeDamage(enemyHealth.currentHealth);
+        particle.SetActive(true);
     }
-    void Explode()
-    {
-        Instantiate(explosion,this.transform);
-    }
+}  
 
-}
