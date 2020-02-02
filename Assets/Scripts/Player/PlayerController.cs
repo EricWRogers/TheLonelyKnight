@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float gravity = 20.0f;
     public float speedBoost = 2f;
 
+    public int DamageToEnemy = 15;
+
     float originalSpeed = 0f;
     float originalGravity = 0f;
 
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour
         // Only need to update is the player is on the ground.
         if (characterControllerGO.isGrounded)
         {
-            Crouching();
+            //Crouching();
             Movement();
             Jump();
             Sprinting();
@@ -111,18 +113,10 @@ public class PlayerController : MonoBehaviour
 
                 if(hit.transform.tag == "Enemy")
                 {
-                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(25);
+                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
                     
                 }
             }
-        }
-    }
-
-    void UseShield()
-    {
-        if(Input.GetButton("Shield"))
-        {
-            
         }
     }
 
@@ -131,4 +125,12 @@ public class PlayerController : MonoBehaviour
         forward = transform.TransformDirection(Vector3.forward) * 20;
         Debug.DrawRay(transform.position, forward, Color.green);
 	}
+
+    void UseShield()
+    {
+        if(Input.GetButton("Shield"))
+        {
+            
+        }
+    }
 }
