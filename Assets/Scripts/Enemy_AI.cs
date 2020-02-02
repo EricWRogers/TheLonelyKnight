@@ -10,8 +10,8 @@ public class Enemy_AI : MonoBehaviour
     Transform enemy;                 
     GameObject player;                                         
     EnemyHealth enemyHealth;                  
-    bool playerInRange;                         
-    float distToPlayer, minDistPlayer, multiplyBy;
+    bool playerInRange,castleInRange;                         
+    float distToPlayer,distToCastle, minDistPlayer, multiplyBy;
     private NavMeshAgent navAgent;   
     GameObject castle;
     public float radius;
@@ -27,6 +27,7 @@ public class Enemy_AI : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator>();
         playerInRange = false;
+        castleInRange = false;
         minDistPlayer = 7f;
 
     }
@@ -42,7 +43,7 @@ public class Enemy_AI : MonoBehaviour
             navAgent.enabled = false;
         }
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-        if(playerInRange && enemyHealth.currentHealth > 0 ) 
+        if((castleInRange || playerInRange) && enemyHealth.currentHealth > 0 ) 
         {
             attackDamage = 30;
             BlowUp();
@@ -51,6 +52,8 @@ public class Enemy_AI : MonoBehaviour
     void IsPlayerClose()
     {
         distToPlayer = Vector3.Distance(enemy.transform.position,player.transform.position);
+        distToCastle = Vector3.Distance(enemy.transform.position,castle.transform.position);
+
         if(distToPlayer <= minDistPlayer)
         {
             playerInRange = true;
@@ -58,6 +61,15 @@ public class Enemy_AI : MonoBehaviour
         else
         {
             playerInRange = false;
+        }
+
+        if(distToCastle <= minDistPlayer)
+        {
+            castleInRange = true;
+        }
+        else
+        {
+            castleInRange = false;
         }
     }
     void BlowUp()
@@ -74,6 +86,10 @@ public class Enemy_AI : MonoBehaviour
             if(nearbyObject.transform.tag == "Player")
             {
                 GameManager.Instance.PlayerDamageTaken(attackDamage);
+            }
+            if(nearbyObject.transform.tag == "Castle")
+            {
+                GameManager.Instance.CastleDamageTaken(attackDamage);
             }
         }
         Explode();

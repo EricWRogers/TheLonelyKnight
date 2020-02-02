@@ -58,16 +58,17 @@ public class EnemyHealth : MonoBehaviour
         //paint.Paint(this.transform.position);
         if(currentHealth <= 0)
         {
+            GameManager.Instance.OnAIDeath();
             Instantiate(Scrap,this.transform, true);
             // ... the enemy is dead.
             Death ();
+            
         }
     }
 
 
     void Death ()
     {
-        GameManager.Instance.OnAIDeath();
         isDead = true;
         StartSinking();
     }
