@@ -5,28 +5,34 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-
+    //A public variable to retain the max Castle health.
     public float OriginalCastleHealth;
 
+    //A transform for AI placement purposes.
     public Transform center;
 
     //Create gameobjects to hold the three types of enemies we will be instantiating.
     public GameObject enemy, enemy2, enemy3;
 
+    //A bool to keep track of the moment the player gets hurts.
     private bool plyrHurt;
 
+    //An int to keep track of an index number for randomized enemy placement.
     private int RndEnemy;
 
-    private Vector3 TempPosition;
+    //Three Vector3s to keep Enemy AIs seperate.
+    private Vector3 TempPosition, TempPositionTwo, TempPositionThree;
 
     //Wave Timer for counting down the 2 minutes inbetween waves.
     public float WTimer = 10;
 
+    //A Timer for the Wave that keeps the max amount of Time inbetween waves.
     private float originalWTimer;
 
     //Set up WaveNumber we are on.
     //Initially Wave Number is set to zero at start because we wait two minutes before the first wave.
     private int waveNumber = 0;
+
 
     public int WaveNumber { get { return waveNumber; } }
 
@@ -36,6 +42,7 @@ public class GameManager : MonoBehaviour
     //Set up private int value for the current number of enemies we have spawned.
     private int NumberEnemiesCurrentlySpawned = 0;
 
+    //Created an enum to keep track of the state machine.
     public enum WaveState
     {
         Resting,
@@ -45,16 +52,22 @@ public class GameManager : MonoBehaviour
         None
     };
 
+    //Serialized the private waveState.
     [SerializeField] private WaveState waveState;
 
+    //Get Function for the WaveState enum.
     public WaveState WaveStateHolder { get { return waveState; } }
 
+    //The int max number of enemy spawns at any given time.
     public int SpawnCap = 40;
+
     //Creates a new event.
     public UnityEvent m_Death = new UnityEvent();
     public UnityEvent m_Messages = new UnityEvent();
 
     //The private float value of scrap parts the player collects to fix things.
+
+
     private float ScrapCount;
 
     //The four private floats for Turrets.
@@ -63,17 +76,20 @@ public class GameManager : MonoBehaviour
     private float Turret3;
     private float Turret4;
 
+    //A Timer value for the Max number of time before the player starts to heal.
     private float OrigWaitedTime = 10;
+
+    //The timer which counts down the time until the player is ready to heal.
     private float WaitedTimer = 0;
 
     //The private float value of player's health.
-    private float PlayerHealth;
+    [SerializeField] private float PlayerHealth;
 
     //The private float value of the castle health.
-    private float CastleHealth;
+    [SerializeField] private float CastleHealth;
 
     //The public float value which gets the private float value of ScrapCount.
-    public float scrpcont { get { return ScrapCount; } }
+    public float scrapCount { get { return ScrapCount; } }
 
     //The public float value which gets the private float value of Turrets 1-4.
     public float turr1 { get { return Turret1; } }
@@ -82,13 +98,15 @@ public class GameManager : MonoBehaviour
     public float turr4 { get { return Turret4; } }
 
     //The public float value which gets the private float value of PlayerHealth.
-    public float PlyrHealth { get { return PlayerHealth; } }
+    public float playrHealth { get { return PlayerHealth; } }
 
     //The public float value which gets the private float value of PlayerHealth.
     public float CstlHealth { get { return CastleHealth; } }
 
+    //Created Instance of the Game Manager.
     public static GameManager Instance { get; private set; } = null;
 
+    //Destroy the instance.
     private void Awake()
     {
         if (Instance == null)
@@ -102,21 +120,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Start Function
     void Start()
     {
         //Listeners for generic functions
         m_Death.AddListener(MyAction);
         m_Messages.AddListener(MyMessages);
 
-        waveState = WaveState.Resting;
-        waveNumber = 20;
-        originalWTimer = WTimer;
+        waveNumber = 1;
+        PlayerHealth = 100f;
 
+        originalWTimer = WTimer;
+        waveState = WaveState.Resting;
         CastleHealth = OriginalCastleHealth;
         WaitedTimer = OrigWaitedTime;
     }
 
 
+    //Update Function
     void Update()
     {
         StateChanger();
@@ -125,6 +146,7 @@ public class GameManager : MonoBehaviour
 
     //-------------------------------------------------------------------------------------
 
+    //the function which changes the state manager using a switch statements.
     void StateChanger()
     {
         switch (waveState)
@@ -147,6 +169,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //The Resting State of the game.
     void StateResting()
     {
         WTimer -= Time.deltaTime;
@@ -158,18 +181,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    //The Starting state of the wave.
     void StaeWaveStart()
     {
-
         NumberEnemiesToSpawn = waveNumber * 4 + 2;
         waveState = WaveState.Spawning;
     }
 
+    //The Spawning State of the wave.
     void SateSpawning()
     {
-        Spawn();
+        if(center != null)
+        {
+            Spawn();
+        }else
+        {
+            waveState = WaveState.None;
+        }
+        
     }
 
+    //The Final State of the wave.
     void SateWaveEnd()
     {
         waveNumber++;
@@ -177,31 +210,36 @@ public class GameManager : MonoBehaviour
         waveState = WaveState.Resting;
     }
 
+    //Function where we actually spawn randomized enemies.
     void Spawn()
     {
         while (NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
         {
-            TempPosition = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
-
-            RndEnemy = (int)Random.Range(1, 3);
+            RndEnemy = Random.Range(1, 4);
 
             switch (RndEnemy)
             {
                 case 1:
+                    TempPosition = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
                     Instantiate(enemy, TempPosition, Quaternion.identity);
                     break;
 
                 case 2:
-                    Instantiate(enemy2, TempPosition, Quaternion.identity);
+                    TempPositionTwo = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+                    Instantiate(enemy2, TempPositionTwo, Quaternion.identity);
                     break;
 
                 case 3:
-                    Instantiate(enemy3, TempPosition, Quaternion.identity);
+                    TempPositionThree = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+                    Instantiate(enemy3, TempPositionThree, Quaternion.identity);
                     break;
+
+                default:
+                break;
 
             }
 
-            Instantiate(enemy, TempPosition, Quaternion.identity);
+            //Instantiate(enemy, TempPosition, Quaternion.identity);
             NumberEnemiesCurrentlySpawned++;
             NumberEnemiesToSpawn--;
         }
@@ -212,12 +250,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    //An Event for death.
     void MyAction()
     {
         //Handle the death screen popup here.
 
     }
 
+    //An Event for messages.
     void MyMessages()
     {
         //handle all the messages in the game here.
@@ -232,20 +273,26 @@ public class GameManager : MonoBehaviour
     //Function called by other scripts to decrease the value of ScrapCount.
     public void SubtractScrapFromCount(float Num)
     {
-        ScrapCount -= Num;
+        if(ScrapCount > Num)
+        {
+            ScrapCount -= Num;
+        }
     }
 
+    //Decrease the value of enemies currently spawned.
     public void OnAIDeath()
     {
         NumberEnemiesCurrentlySpawned--;
     }
 
+    //Player takes damage function.
     public void PlayerDamageTaken(float num)
     {
         PlayerHealth -= num;
         plyrHurt = true;
     }
 
+    //A function to alot a certain time after the player hasn't gotten hurt to begin to heal and gain health.
     void PlayerWaitedRestore()
     {
         WaitedTimer -= Time.deltaTime;
@@ -263,17 +310,20 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Restoring castle health.
     public void CastleHealthRestored(float num)
     {
         CastleHealth += num;
     }
 
+    //Decrease castle health.
     public void CastleDamageTaken(float num)
     {
         CastleHealth -= num;
     }
 
 
+    //Turrent Health restoration.
     public void TurrentHealthAdd(int turrentnumber, float num)
     {
         switch (turrentnumber)
@@ -296,6 +346,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Turrent health destruction.
     public void TurrentHealthSubtract(int turrentnumber, float num)
     {
         switch (turrentnumber)

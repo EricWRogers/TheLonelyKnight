@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6224262866203652281}
   - component: {fileID: 6224262866203652280}
   - component: {fileID: 6224262866203652283}
-  - component: {fileID: 6224262866203652278}
+  - component: {fileID: -1717895432293620165}
   - component: {fileID: 6224262866203652282}
+  - component: {fileID: 6224262866203652278}
   m_Layer: 0
   m_Name: Scrap
   m_TagString: Untagged
@@ -81,18 +82,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6224262866203652278
-MonoBehaviour:
+--- !u!54 &-1717895432293620165
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6224262866203652285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cbeae224e9f1fe4881d6dc2723f4f93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!135 &6224262866203652282
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -106,3 +111,15 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6224262866203652278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224262866203652285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbeae224e9f1fe4881d6dc2723f4f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
