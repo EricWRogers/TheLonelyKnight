@@ -11,7 +11,7 @@ public class Turret : MonoBehaviour
     public Transform partToRotate;
 
     private float fireCountdown = 0.0f;
-    private float turretHealth = 100f;
+    [SerializeField] private float turretHealth = 100f;
 
     private Transform target;
 
@@ -78,13 +78,9 @@ public class Turret : MonoBehaviour
             Vector3 dir = target.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-            partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
+            partToRotate.rotation = Quaternion.Euler( rotation.x, rotation.y, 0f);
         } 
-        else
-        {
-            Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, originalRotation, Time.deltaTime * turnSpeed).eulerAngles;
-            partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-        }
 	}
 
     void Shoot()
