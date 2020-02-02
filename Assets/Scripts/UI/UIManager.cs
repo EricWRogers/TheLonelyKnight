@@ -58,6 +58,7 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        GameManager.Instance.playerCamera.GetComponent<CameraController>().enabled=false;
     }
 
 
@@ -257,12 +258,14 @@ public class UIManager : MonoBehaviour
 
     public void OpenSettings()
     {
+        GameManager.Instance.playerCamera.GetComponent<CameraController>().enabled=false;
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
         settingsPanel.SetActive(true);
     }
     public void ResumeGame()
     {
+        GameManager.Instance.playerCamera.GetComponent<CameraController>().enabled=true;
         alreadyPressed = 0;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
@@ -276,6 +279,7 @@ public class UIManager : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+        GameManager.Instance.playerCamera.GetComponent<CameraController>().enabled=false;
     }
     public void StartButton()
     {
@@ -284,9 +288,11 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.StartRestingState();
         startMenu.SetActive(false);
         hudPanel.SetActive(true);
+        GameManager.Instance.playerCamera.GetComponent<CameraController>().enabled=true;
     }
     public void GameOver()
     {
+        GameManager.Instance.playerCamera.GetComponent<CameraController>().enabled=false;
         gameOverPanel.SetActive(true);
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
