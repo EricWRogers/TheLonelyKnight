@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     public int DamageToEnemy = 15;
 
+    public Transform bulletHolder; 
+
     float originalSpeed = 0f;
     float originalGravity = 0f;
 
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     CharacterController characterControllerGO;
     RaycastHit hit;
     RaycastHit hitTower;
+
     Vector3 forward;
 
     void Start()
@@ -110,15 +113,17 @@ public class PlayerController : MonoBehaviour
 
     void FireWeapon()
     {
-        if(Input.GetButton("Shoot"))
+        if(GameManager.Instance.WaveStateHolder  != GameManager.WaveState.None)
         {
-            if (Physics.Raycast(transform.position, forward, out hit, 10))
+            if(Input.GetButton("Shoot"))
             {
-
-                if(hit.transform.tag == "Enemy")
+                if (Physics.Raycast(bulletHolder.position, forward, out hit, 150))
                 {
-                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
-                    
+                    if(hit.transform.tag == "Enemy")
+                    {
+                        hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
+                        
+                    }
                 }
             }
         }
@@ -175,7 +180,7 @@ public class PlayerController : MonoBehaviour
     void OnDrawGizmos()
 	{
         forward = transform.TransformDirection(Vector3.forward) * 20;
-        Debug.DrawRay(transform.position, forward, Color.green);
+        Debug.DrawRay(bulletHolder.position, forward, Color.green);
 
         forward = transform.TransformDirection(Vector3.forward) * 3;
         Debug.DrawRay(transform.position, forward, Color.red);
