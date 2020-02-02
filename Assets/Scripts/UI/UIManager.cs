@@ -222,6 +222,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
         startMenu.SetActive(true);
         hudPanel.SetActive(false);
+        settingsPanel.SetActive(false);
     }
     public void StartButton()
     {
