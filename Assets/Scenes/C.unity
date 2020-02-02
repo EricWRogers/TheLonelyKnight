@@ -1123,9 +1123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OriginalCastleHealth: 0
   center: {fileID: 807880073}
-  enemy: {fileID: 821201599}
-  enemy2: {fileID: 1834670505}
-  enemy3: {fileID: 81727752}
+  enemy: {fileID: 5487722058387752478, guid: ccb8c82efed8d1a408c87c68f58f9125, type: 3}
+  enemy2: {fileID: 3046534257615844809, guid: 17503f2f94610d74b82ffe5a9bf46ab3, type: 3}
+  enemy3: {fileID: 5775958043882861164, guid: aa772bf86159b834a904148d849f91ba, type: 3}
   WTimer: 10
   waveState: 0
   SpawnCap: 40

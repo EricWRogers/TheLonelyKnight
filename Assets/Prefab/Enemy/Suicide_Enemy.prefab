@@ -130,6 +130,9 @@ MonoBehaviour:
   currentHealth: 0
   sinkSpeed: 3
   deathClip: {fileID: 0}
+  capsuleCollider: {fileID: 0}
+  rigidbody: {fileID: 0}
+  Scrap: {fileID: 6224262866203652285, guid: f0525d46a2e48a943af1ae4a4561daba, type: 3}
 --- !u!114 &8931051620068336632
 MonoBehaviour:
   m_ObjectHideFlags: 0
