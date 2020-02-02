@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent m_Messages = new UnityEvent();
 
     //The private float value of scrap parts the player collects to fix things.
+
+
     private float ScrapCount;
 
     //The four private floats for Turrets.
@@ -81,13 +83,13 @@ public class GameManager : MonoBehaviour
     private float WaitedTimer = 0;
 
     //The private float value of player's health.
-    private float PlayerHealth;
+    [SerializeField] private float PlayerHealth;
 
     //The private float value of the castle health.
-    private float CastleHealth;
+    [SerializeField] private float CastleHealth;
 
     //The public float value which gets the private float value of ScrapCount.
-    public float scrpcont { get { return ScrapCount; } }
+    public float scrapCount { get { return ScrapCount; } }
 
     //The public float value which gets the private float value of Turrets 1-4.
     public float turr1 { get { return Turret1; } }
@@ -96,7 +98,7 @@ public class GameManager : MonoBehaviour
     public float turr4 { get { return Turret4; } }
 
     //The public float value which gets the private float value of PlayerHealth.
-    public float PlyrHealth { get { return PlayerHealth; } }
+    public float playrHealth { get { return PlayerHealth; } }
 
     //The public float value which gets the private float value of PlayerHealth.
     public float CstlHealth { get { return CastleHealth; } }
@@ -125,10 +127,11 @@ public class GameManager : MonoBehaviour
         m_Death.AddListener(MyAction);
         m_Messages.AddListener(MyMessages);
 
-        waveState = WaveState.Resting;
-        waveNumber = 20;
-        originalWTimer = WTimer;
+        waveNumber = 1;
+        PlayerHealth = 100f;
 
+        originalWTimer = WTimer;
+        waveState = WaveState.Resting;
         CastleHealth = OriginalCastleHealth;
         WaitedTimer = OrigWaitedTime;
     }
@@ -182,7 +185,6 @@ public class GameManager : MonoBehaviour
     //The Starting state of the wave.
     void StaeWaveStart()
     {
-
         NumberEnemiesToSpawn = waveNumber * 4 + 2;
         waveState = WaveState.Spawning;
     }
@@ -190,7 +192,14 @@ public class GameManager : MonoBehaviour
     //The Spawning State of the wave.
     void SateSpawning()
     {
-        Spawn();
+        if(center != null)
+        {
+            Spawn();
+        }else
+        {
+            waveState = WaveState.None;
+        }
+        
     }
 
     //The Final State of the wave.
@@ -206,7 +215,6 @@ public class GameManager : MonoBehaviour
     {
         while (NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
         {
-            
             RndEnemy = Random.Range(1, 4);
 
             switch (RndEnemy)
@@ -225,6 +233,7 @@ public class GameManager : MonoBehaviour
                     TempPositionThree = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
                     Instantiate(enemy3, TempPositionThree, Quaternion.identity);
                     break;
+
                 default:
                 break;
 
@@ -264,7 +273,10 @@ public class GameManager : MonoBehaviour
     //Function called by other scripts to decrease the value of ScrapCount.
     public void SubtractScrapFromCount(float Num)
     {
-        ScrapCount -= Num;
+        if(ScrapCount > Num)
+        {
+            ScrapCount -= Num;
+        }
     }
 
     //Decrease the value of enemies currently spawned.
