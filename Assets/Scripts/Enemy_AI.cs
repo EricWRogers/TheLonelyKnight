@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Enemy_AI : MonoBehaviour
 {
-    public float timeBetweenAttacks = 0.5f;    
-    public int attackDamage = 10;       
+    public float timeBetweenAttacks;    
+    public int attackDamage;       
     public int enemyType;   //1.is melee 2. is ranged 3. is suicide    
-
     Animator anim;          
     Transform enemy;                 
     GameObject player;                         
@@ -18,8 +17,12 @@ public class Enemy_AI : MonoBehaviour
     float distToPlayer;
     float minDistPlayer;
     float multiplyBy;
-    private Transform startTransform;
-    private NavMeshAgent navAgent;
+    private NavMeshAgent navAgent;   
+    public Rigidbody Projectile;
+    public GameObject firePoint;
+    public float bulletSpeed;
+    public float radius;
+    public float force;
 
     private void Awake ()
     {
@@ -42,10 +45,11 @@ public class Enemy_AI : MonoBehaviour
         IsPlayerClose();
         if(enemyHealth.currentHealth > 0)
         {
-            if(enemyType == 2 && playerInRange )
+            if(enemyType == 2 && playerInRange)
             {
                 Vector3 runTo = enemy.position + ((enemy.position - player.transform.position) * 1); 
                 navAgent.SetDestination(runTo);
+                enemy.LookAt(player.transform);
             }
             else
             {
@@ -57,10 +61,15 @@ public class Enemy_AI : MonoBehaviour
             navAgent.enabled = false;
         }
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-        if(timer >= timeBetweenAttacks && distToPlayer <= minDistPlayer && enemyHealth.currentHealth > 0)
+        if(timer >= timeBetweenAttacks && distToPlayer <= minDistPlayer && enemyHealth.currentHealth > 0 && enemyType != 2) 
         {
             Attack (); 
         }
+        else if(enemyType ==2 && distToPlayer >= minDistPlayer && timer >= timeBetweenAttacks)
+        {
+            Attack();
+        }
+
    
     }
     void IsPlayerClose()
@@ -77,12 +86,28 @@ public class Enemy_AI : MonoBehaviour
     }
     void Shoot()
     {
-        //instantiate bullets
+        Rigidbody bulletTemp = Instantiate(Projectile,firePoint.transform.position,firePoint.transform.rotation) as Rigidbody;
+        bulletTemp.velocity = transform.TransformDirection(new Vector3(0, 0,bulletSpeed));
+        Destroy(bulletTemp, 15f);
     }
 
     void BlowUp()
     {
-        //collider based explosion
+        //explosion effect here!!
+        Collider[] colliders = Physics.OverlapSphere(transform.position,radius);
+        foreach(Collider nearbyObject in colliders)
+        {
+            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
+            if(rb!= null)
+            {
+                rb.AddExplosionForce(force,transform.position,radius);
+            }
+            if(nearbyObject.transform.tag == "Player")
+            {
+                GameManager.Instance.PlayerDamageTaken(attackDamage);
+            }
+        }
+        //kill the enemy
          enemyHealth.currentHealth -= enemyHealth.currentHealth;
     }
 
@@ -93,6 +118,7 @@ public class Enemy_AI : MonoBehaviour
         {
             //based off of the range the enemy and player
             attackDamage = 10;
+            GameManager.Instance.PlayerDamageTaken(attackDamage);
         }
 
         if(enemyType == 2)

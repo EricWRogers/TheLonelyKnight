@@ -16,6 +16,7 @@ public class EnemyHealth : MonoBehaviour
     public Rigidbody rigidbody;   
     public GameObject Scrap;
     GameManager gameManager;
+    NavMeshAgent nav;
          
     bool isDead;                               
     bool isSinking;
@@ -28,6 +29,7 @@ public class EnemyHealth : MonoBehaviour
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
+        nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         currentHealth = startingHealth;
     }
@@ -68,7 +70,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
-        Instantiate(Scrap,this.transform);
+        Instantiate(Scrap, transform, true);
         gameManager.OnAIDeath();
         capsuleCollider.isTrigger = true;
         // The enemy is dead.
@@ -88,8 +90,9 @@ public class EnemyHealth : MonoBehaviour
     public void StartSinking ()
     {
           // Find and disable the Nav Mesh Agent.
-
+        nav.enabled  = false;
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
+        rigidbody.isKinematic  = true;
         // The enemy should no sink.
         isSinking = true;
         Debug.Log("should be sinking");
