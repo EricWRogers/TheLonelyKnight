@@ -7,43 +7,44 @@ public class Tower : MonoBehaviour
     public bool towerActiveOnStart;
 
     private float towerHealth = 100f;
-    private float originaTowerHealth;
+    private float originaTowerHealth = 100f;
 
-    private GameObject Gun;
+    public GameObject gun;
+
+    public Animator animator;
 
     void Start()
     {
-        originaTowerHealth = towerHealth;
-
         if(towerActiveOnStart)
         {
-            // Turn on rising Animation.
-            Gun.GetComponentInChildren<Turret>().EnableGun();
+            animator.GetComponent<Animator>().SetBool("TowerActive", true);
+            gun.GetComponentInChildren<Turret>().EnableGun();
+        }
+    }
+
+    void Update()
+    {
+        if(towerHealth <= 0)
+        {
+            TowerDestroyed();
         }
     }
 
     private void TowerDestroyed()
     {
-        // Turn on falling Animation.
-        Gun.GetComponentInChildren<Turret>().DisableGun();
+        animator.GetComponent<Animator>().SetBool("TowerActive", false);
+        gun.GetComponentInChildren<Turret>().DisableGun();
     }
 
     public void repairTower()
     {
-        // Turn on rising Animation.
+        animator.GetComponent<Animator>().SetBool("TowerActive", true);
         towerHealth = originaTowerHealth;
-        Gun.GetComponentInChildren<Turret>().EnableGun();
+        gun.GetComponentInChildren<Turret>().EnableGun();
     }
 
     public void DamageToTower(float Num)
     {
-        if(towerHealth > Num)
-        {
-            towerHealth -= Num;
-        }
-        else
-        {
-            TowerDestroyed();
-        }
+        towerHealth -= Num;
     }
 }
