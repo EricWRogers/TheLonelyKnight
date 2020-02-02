@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4590972797010497710}
   - component: {fileID: 2793224697992539728}
   - component: {fileID: 2555229606385007105}
-  - component: {fileID: 5395972138092424432}
   - component: {fileID: 27110739499946157}
   - component: {fileID: 3118529417881858807}
+  - component: {fileID: 9004359837826969868}
   m_Layer: 0
   m_Name: Turtle
   m_TagString: Enemy
@@ -124,31 +124,9 @@ MonoBehaviour:
   currentHealth: 0
   sinkSpeed: 2.5
   deathClip: {fileID: 0}
-  capsuleCollider: {fileID: 0}
+  meshCollider: {fileID: 3118529417881858807}
   rigidbody: {fileID: 27110739499946157}
   Scrap: {fileID: 6224262866203652285, guid: f0525d46a2e48a943af1ae4a4561daba, type: 3}
---- !u!195 &5395972138092424432
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2849300150060901490}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 4
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 20
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!54 &27110739499946157
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -179,6 +157,28 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8687930037020855540, guid: a1e0d1e1729f0fcaab9b0499dd84f58a, type: 3}
+--- !u!195 &9004359837826969868
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2849300150060901490}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 0.009274728
+  m_Speed: 4
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.02693412
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &3856462095871872372
 GameObject:
   m_ObjectHideFlags: 0

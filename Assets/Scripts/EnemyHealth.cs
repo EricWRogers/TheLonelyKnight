@@ -11,7 +11,8 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip deathClip;  
     Animator anim;                       
     AudioSource enemyAudio;                   
-    ParticleSystem hitParticles;                
+    ParticleSystem hitParticles;    
+    PaintBlood paint;            
     public MeshCollider meshCollider;  
     public Rigidbody rigidbody;   
     public GameObject Scrap;
@@ -35,16 +36,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Update ()
     {
-        if(currentHealth <= 0)
-        {
-            //There were two references for death. This was causing the death function to repeat
-            //because as soon as currenthealth reached zero the Update just did the Death function
-            //repeatedly.
-
-
-            // ... the enemy is dead ... or in this case overkill Demello. :)
-            //Death ();
-        }
         if(isSinking)
         {
             // ... move the enemy down by the sinkSpeed per second.
@@ -63,7 +54,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage (int amount)
     {
         currentHealth -= amount;
-        
+        paint.Paint(transform.position);
         if(currentHealth <= 0)
         {
             Instantiate(Scrap,this.transform, true);

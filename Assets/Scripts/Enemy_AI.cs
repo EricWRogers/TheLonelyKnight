@@ -19,6 +19,7 @@ public class Enemy_AI : MonoBehaviour
     private NavMeshAgent navAgent;   
     public Rigidbody Projectile;
     public GameObject firePoint;
+    GameObject castle;
     public float bulletSpeed;
     public float radius;
     public float force;
@@ -28,6 +29,7 @@ public class Enemy_AI : MonoBehaviour
         enemy = this.transform;
         navAgent = this.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag ("Player");
+        castle = GameObject.FindGameObjectWithTag ("Castle");
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator>();
         playerInRange = false;
@@ -50,10 +52,16 @@ public class Enemy_AI : MonoBehaviour
                 navAgent.SetDestination(runTo);
                 enemy.LookAt(player.transform);
             }
-            else
+            else if(enemyType == 1)
             {
                 navAgent.SetDestination (player.transform.position);
             }
+            else if(enemyType == 3)
+            {
+                
+                navAgent.SetDestination (castle.transform.position);
+            }
+
         }
         else
         {
