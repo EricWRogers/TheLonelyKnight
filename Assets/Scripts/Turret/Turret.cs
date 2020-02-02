@@ -8,7 +8,13 @@ public class Turret : MonoBehaviour
     public float fireRate = 1f;
 	public float turnSpeed = 10f;
 
+    public float bulletSpeed = 100f;
+
     public Transform partToRotate;
+
+    public Transform bulletHolder;
+
+    public GameObject bullet;
 
     private bool GunActive = false;
 
@@ -85,16 +91,11 @@ public class Turret : MonoBehaviour
 
     void Shoot()
     {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
-        if (Physics.Raycast(transform.position, forward, out hit, 10))
-        {
+        GameObject bulletClone =  Instantiate(bullet, bulletHolder.position, bulletHolder.rotation);
+        bulletClone.GetComponent<Rigidbody>().AddForce(bulletClone.transform.right * bulletSpeed, ForceMode.Impulse);
+        BulletScript.Destroy(bullet,3.0f);
 
-            if(hit.transform.tag == "Enemy")
-            {
-                hit.transform.GetComponent<EnemyHealth>().TakeDamage(25);
-            }
-        }
     }
 
     void OnDrawGizmosSelected()
