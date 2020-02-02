@@ -17,7 +17,6 @@ public class Temp : MonoBehaviour
         {
                 GameManagerGO.OnAIDeath();
                 Destroy(gameObject);
-
         }
     }
 }
