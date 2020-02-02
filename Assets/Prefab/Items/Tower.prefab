@@ -89,9 +89,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2886316473783280344}
+  - component: {fileID: 1144164244}
+  - component: {fileID: 96663951}
   m_Layer: 0
   m_Name: Tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,6 +116,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1144164244
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185679937017680075}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a61228fdf5b6820ca8843f38d4981010, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &96663951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185679937017680075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c450fcca658ffe44a78dda17d8b1695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerActiveOnStart: 0
+  gun: {fileID: 2593689408057513706}
+  animator: {fileID: 1144164244}
 --- !u!1 &4035530465098251787
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +565,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 635128b5aeb141f6f9eebfbe3dd52fea, type: 3}
+--- !u!1 &2593689408057513706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3968723550280008124, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1507896415078897494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3199168022776779449 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4073687905224803823, guid: 635128b5aeb141f6f9eebfbe3dd52fea,

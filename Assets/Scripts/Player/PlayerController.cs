@@ -9,6 +9,11 @@ public class PlayerController : MonoBehaviour
     public float gravity = 20.0f;
     public float speedBoost = 2f;
 
+    public float scrapRepairCost = 200f;
+    public float scrapActaveCost = 250f;
+
+    public int DamageToEnemy = 15;
+
     float originalSpeed = 0f;
     float originalGravity = 0f;
 
@@ -17,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     CharacterController characterControllerGO;
     RaycastHit hit;
+    RaycastHit hitTower;
     Vector3 forward;
 
     void Start()
@@ -35,11 +41,12 @@ public class PlayerController : MonoBehaviour
         // Only need to update is the player is on the ground.
         if (characterControllerGO.isGrounded)
         {
-            Crouching();
+            //Crouching();
             Movement();
             Jump();
             Sprinting();
             FireWeapon();
+            TowerInteract();
         }
 
         // Needed to apply moveDirection to the characterController.
@@ -111,8 +118,48 @@ public class PlayerController : MonoBehaviour
 
                 if(hit.transform.tag == "Enemy")
                 {
-                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(25);
+                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
                     
+                }
+            }
+        }
+    }
+
+    void TowerInteract()
+    {
+        if(Physics.Raycast(transform.position, forward, out hitTower, 3))
+        {
+            if(hitTower.transform.tag == "Tower")
+            {
+                if(hitTower.transform.GetComponent<Tower>().towerActiveOnStart)
+                {
+                    // Display message to player to repair
+                    if(Input.GetButton("Interact"))
+                    {
+                        GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
+                        hitTower.transform.GetComponent<Tower>().repairTower();
+                    }
+                }
+                else
+                {
+                    // Display message to player to Actave
+
+                    if(Input.GetButton("Interact"))
+                    {
+                        GameManager.Instance.SubtractScrapFromCount(scrapActaveCost);
+                        hitTower.transform.GetComponent<Tower>().repairTower();
+                    }
+                }
+            }
+
+            if(hitTower.transform.tag == "Castle")
+            {
+                // Display message to player to repair
+
+                if(Input.GetButton("Interact"))
+                {
+                    GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
+                    // hitTower.transform.GetComponent<Castle>().repairTower();
                 }
             }
         }
@@ -125,10 +172,13 @@ public class PlayerController : MonoBehaviour
             
         }
     }
-
-    void OnDrawGizmosSelected()
+    
+    void OnDrawGizmos()
 	{
         forward = transform.TransformDirection(Vector3.forward) * 20;
         Debug.DrawRay(transform.position, forward, Color.green);
+
+        forward = transform.TransformDirection(Vector3.forward) * 3;
+        Debug.DrawRay(transform.position, forward, Color.red);
 	}
 }

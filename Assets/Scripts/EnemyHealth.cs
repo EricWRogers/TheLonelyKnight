@@ -20,6 +20,7 @@ public class EnemyHealth : MonoBehaviour
     bool isDead;                               
     bool isSinking;
     bool isRising;
+ 
 
     void Start ()
     {
@@ -37,8 +38,13 @@ public class EnemyHealth : MonoBehaviour
     {
         if(currentHealth <= 0)
         {
-            // ... the enemy is dead.
-            Death ();
+            //There were two references for death. This was causing the death function to repeat
+            //because as soon as currenthealth reached zero the Update just did the Death function
+            //repeatedly.
+
+
+            // ... the enemy is dead ... or in this case overkill Demello. :)
+            //Death ();
         }
         if(isSinking)
         {
@@ -58,9 +64,11 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage (int amount)
     {
         currentHealth -= amount;
-
+        
         if(currentHealth <= 0)
         {
+            Instantiate(Scrap,this.transform, true);
+            Debug.Log("Instantiate");
             // ... the enemy is dead.
             Death ();
         }
@@ -69,7 +77,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
-        Instantiate(Scrap,this.transform, true);
+        Debug.Log("Made it here.");
         GameManager.Instance.OnAIDeath();
         meshCollider.isTrigger = true;
         // The enemy is dead.
