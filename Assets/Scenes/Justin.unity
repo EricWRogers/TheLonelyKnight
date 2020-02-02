@@ -836,25 +836,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989284064}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f821d905218b7d40a2e8b14d53ec310, type: 3}
+  m_Script: {fileID: 11500000, guid: 09582d8c189fda589b0783f682bd885c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OriginalCastleHealth: 0
+  center: {fileID: 0}
+  enemy: {fileID: 0}
+  enemy2: {fileID: 0}
+  enemy3: {fileID: 0}
+  WTimer: 10
+  waveState: 0
+  SpawnCap: 40
   m_Death:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  m_Messages:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &989284066
 Transform:
   m_ObjectHideFlags: 0

@@ -7,7 +7,8 @@ public class UIManager : MonoBehaviour
 {
 
     [Header("Scrape")]
-    public TMP_Text scrapeText;
+    public TMP_Text scrapText;
+    private float scrapAmount = 0f;
 
     [Header("Waves")]
     public GameObject wavePanel;
@@ -15,7 +16,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Toast")]
     public GameObject toastOB;
-    public TMP_Text scrapeRequiredText;
+    public TMP_Text scrapRequiredText;
     public TMP_Text instructionText;
 
     [Header("Health Bars")]
@@ -30,6 +31,16 @@ public class UIManager : MonoBehaviour
     private float prevPlayerHealth = 100f;
     private float prevCastleHealth = 100f;
 
+    [Header("Settings")]
+    public GameObject settingsPanel;
+
+    [Header("StartMenu")]
+    public GameObject startMenu;
+    public GameObject hudPanel;
+    public GameObject optionsPanel;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +51,20 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.playrHealth != prevPlayerHealth)
+        {
+            PlayerHealthBar(GameManager.Instance.playrHealth);
+        }
+
+        if (GameManager.Instance.castleHealth != prevCastleHealth)
+        {
+            CastleHealthBar(GameManager.Instance.castleHealth);
+        }
+        if (GameManager.Instance.scrapCount != scrapAmount)
+        {
+            scrapAmount = GameManager.Instance.scrapCount;
+            scrapText.text = "" + scrapAmount;
+        }
 
     }
 
@@ -55,7 +80,7 @@ public class UIManager : MonoBehaviour
             playerHealthBarAnim.SetBool("Play", false);
         }
         prevPlayerHealth = health;
-        
+
         if (health > 67)
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
@@ -98,7 +123,7 @@ public class UIManager : MonoBehaviour
     public void CastleHealthBar(float health)
     {
         int avaibleBars = (int)(health / 6.25f);
-        
+
         if (health < prevCastleHealth)
         {
             castleHealthBarAnim.SetBool("Play", true);
@@ -108,7 +133,7 @@ public class UIManager : MonoBehaviour
             castleHealthBarAnim.SetBool("Play", false);
         }
         prevCastleHealth = health;
-        
+
         if (health > 67)
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
@@ -147,5 +172,40 @@ public class UIManager : MonoBehaviour
             }
         }
 
+    }
+    public void ToastPopUp(float scrapeAmount)
+    {
+        scrapRequiredText.text = "" + scrapeAmount;
+        instructionText.text = "Press E to upgrade";
+        toastOB.SetActive(true);
+    }
+
+    public void OpenSettings()
+    {
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
+        settingsPanel.SetActive(true);
+    }
+    public void ResumeGame()
+    {
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+        settingsPanel.SetActive(false);
+    }
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
+    public void GoToStartMenu()
+    {
+        Time.timeScale = 1;
+        startMenu.SetActive(true);
+        hudPanel.SetActive(false);
+    }
+    public void StartButton()
+    {
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        startMenu.SetActive(false);
+        hudPanel.SetActive(true);
     }
 }

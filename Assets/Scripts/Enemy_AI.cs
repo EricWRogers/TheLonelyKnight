@@ -9,8 +9,7 @@ public class Enemy_AI : MonoBehaviour
     public int enemyType;   //1.is melee 2. is ranged 3. is suicide    
     Animator anim;          
     Transform enemy;                 
-    GameObject player;                         
-    GameManager gameManager;                 
+    GameObject player;                                         
     EnemyHealth enemyHealth;                  
     bool playerInRange;                         
     float timer;                                

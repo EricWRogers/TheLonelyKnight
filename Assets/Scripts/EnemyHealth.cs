@@ -15,7 +15,6 @@ public class EnemyHealth : MonoBehaviour
     public CapsuleCollider capsuleCollider;  
     public Rigidbody rigidbody;   
     public GameObject Scrap;
-    GameManager gameManager;
     NavMeshAgent nav;
          
     bool isDead;                               
@@ -70,8 +69,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
-        Instantiate(Scrap, transform, true);
-        gameManager.OnAIDeath();
+        Instantiate(Scrap,this.transform, true);
+        GameManager.Instance.OnAIDeath();
         capsuleCollider.isTrigger = true;
         // The enemy is dead.
         isDead = true;

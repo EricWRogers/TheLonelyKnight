@@ -322,23 +322,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1769988450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab13b352bb57c86983b1def93afb29d, type: 3}
+  m_Script: {fileID: 11500000, guid: 09582d8c189fda589b0783f682bd885c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OriginalCastleHealth: 0
+  center: {fileID: 0}
+  enemy: {fileID: 0}
+  enemy2: {fileID: 0}
+  enemy3: {fileID: 0}
+  WTimer: 10
+  waveState: 0
+  SpawnCap: 40
   m_Death:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4873935449306927914}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
+  m_Messages:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1769988452
 Transform:
   m_ObjectHideFlags: 0
@@ -538,9 +538,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
---- !u!1 &4873935449306927914 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4873935449973407187, guid: b6c6f860250f6df6a853a1154ebe1a96,
-    type: 3}
-  m_PrefabInstance: {fileID: 4873935449306927873}
-  m_PrefabAsset: {fileID: 0}
