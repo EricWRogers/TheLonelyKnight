@@ -11,10 +11,12 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip deathClip;  
     Animator anim;                       
     AudioSource enemyAudio;                   
-    ParticleSystem hitParticles;                
-    public CapsuleCollider capsuleCollider;  
+    ParticleSystem hitParticles;    
+    PaintBlood paint;            
+    public MeshCollider meshCollider;  
     public Rigidbody rigidbody;   
     public GameObject Scrap;
+    NavMeshAgent nav;
          
     bool isDead;                               
     bool isSinking;
@@ -26,23 +28,14 @@ public class EnemyHealth : MonoBehaviour
         // Setting up the references.
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
-        capsuleCollider = GetComponent <CapsuleCollider> ();
+        meshCollider = GetComponent <MeshCollider> ();
+        nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         currentHealth = startingHealth;
     }
 
     void Update ()
     {
-        if(currentHealth <= 0)
-        {
-            //There were two references for death. This was causing the death function to repeat
-            //because as soon as currenthealth reached zero the Update just did the Death function
-            //repeatedly.
-
-
-            // ... the enemy is dead ... or in this case overkill Demello. :)
-            //Death ();
-        }
         if(isSinking)
         {
             // ... move the enemy down by the sinkSpeed per second.
@@ -61,7 +54,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage (int amount)
     {
         currentHealth -= amount;
-        
+        paint.Paint(transform.position);
         if(currentHealth <= 0)
         {
             Instantiate(Scrap,this.transform, true);
@@ -74,7 +67,7 @@ public class EnemyHealth : MonoBehaviour
     void Death ()
     {
         GameManager.Instance.OnAIDeath();
-        capsuleCollider.isTrigger = true;
+        meshCollider.isTrigger = true;
         // The enemy is dead.
         isDead = true;
         StartSinking();
@@ -92,8 +85,9 @@ public class EnemyHealth : MonoBehaviour
     public void StartSinking ()
     {
           // Find and disable the Nav Mesh Agent.
-
+        nav.enabled  = false;
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
+        rigidbody.isKinematic  = true;
         // The enemy should no sink.
         isSinking = true;
         // After 2 seconds destory the enemy.
