@@ -10,8 +10,9 @@ public class Turret : MonoBehaviour
 
     public Transform partToRotate;
 
+    private bool GunActive = false;
+
     private float fireCountdown = 0.0f;
-    [SerializeField] private float turretHealth = 100f;
 
     private Transform target;
 
@@ -21,8 +22,6 @@ public class Turret : MonoBehaviour
     private Quaternion originalRotation;
 
     private RaycastHit hit;
-
-    
 
     // Start is called before the first frame update
     void Start()
@@ -35,15 +34,16 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LockOnTarget();
-
-        if (fireCountdown <= 0f)
+        if(GunActive != false)
         {
-            Shoot();
-            fireCountdown = 1f / fireRate;
+            LockOnTarget();
+            if (fireCountdown <= 0f)
+            {
+                Shoot();
+                fireCountdown = 1f / fireRate;
+            }
+            fireCountdown -= Time.deltaTime;
         }
-
-        fireCountdown -= Time.deltaTime;
     }
 
     void UpdateTarget()
@@ -102,4 +102,15 @@ public class Turret : MonoBehaviour
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, range);
 	}
+
+    public void DisableGun()
+    {
+        GunActive = false;
+    }
+
+    public void EnableGun()
+    {
+        GunActive = true;
+    }
+
 }
