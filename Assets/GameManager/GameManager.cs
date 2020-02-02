@@ -303,6 +303,19 @@ public class GameManager : MonoBehaviour
         CastleHealth -= num;
     }
 
+    //Castle takes damage function.
+    public void CastleDamageIsHere(float num)
+    {
+        if(num > castleHealth)
+        {
+            //GameOver
+            m_Death.Invoke();
+
+        } else if(castleHealth > 0){
+            CastleHealth -= num;
+        }
+    }
+
     //A function to alot a certain time after the player hasn't gotten hurt to begin to heal and gain health.
     void PlayerWaitedRestore()
     {
