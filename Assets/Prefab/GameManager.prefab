@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5249514750265357364}
   - component: {fileID: 3366952055859923439}
+  - component: {fileID: 1449135548}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -43,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09582d8c189fda589b0783f682bd885c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   WTimer: 10
   SpawnWidth: 10
   SpawnHeight: 30
@@ -96,3 +98,17 @@ MonoBehaviour:
   waveState: 0
   PlayerHealth: 0
   CastleHealth: 0
+--- !u!114 &1449135548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249514750265357365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc85d4fe1bc476409f6630d4cf68611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PaintPrefab: {fileID: 8971727621877959720, guid: e10b5580b2463e843abe0650ecc2ffad,
+    type: 3}

@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+
+    public GameObject playerCamera;
     //Wave Timer for counting down the 2 minutes inbetween waves.
     public float WTimer = 10;
 
