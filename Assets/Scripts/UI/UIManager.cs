@@ -25,8 +25,8 @@ public class UIManager : MonoBehaviour
     public Animator playerHealthBarAnim;
     public Animator castleHealthBarAnim;
     
-    public Image[] playerHealthBarImages;
-    public Image[] castleHealthBarImages;
+    public GameObject[] playerHealthBarImages;
+    public GameObject[] castleHealthBarImages;
     public Color[] healthColors;
     private float prevPlayerHealth = 100f;
     private float prevCastleHealth = 100f;
@@ -125,15 +125,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].tintColor = healthColors[0];
+                //playerHealthBarImages[i].tintColor = healthColors[0];
 
                 if (i > avaibleBars)
                 {
-                    playerHealthBarImages[i].SetEnabled(false);
+                    playerHealthBarImages[i].SetActive(false);
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetEnabled(true);
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
 
@@ -142,15 +142,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].tintColor = healthColors[1];
+                //playerHealthBarImages[i].tintColor = healthColors[1];
 
                 if (i > avaibleBars)
                 {
-                    playerHealthBarImages[i].SetEnabled(false);
+                    playerHealthBarImages[i].SetActive(false);
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetEnabled(true);
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -158,15 +158,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].tintColor = healthColors[2];
+                //playerHealthBarImages[i].tintColor = healthColors[2];
 
                 if (i > avaibleBars)
                 {
-                    playerHealthBarImages[i].SetEnabled(false);
+                    playerHealthBarImages[i].SetActive(false);
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetEnabled(true);
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -190,15 +190,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].tintColor = healthColors[0];
+                //castleHealthBarImages[i].tintColor = healthColors[0];
 
                 if (i > avaibleBars)
                 {
-                    castleHealthBarImages[i].SetEnabled(false);
+                    castleHealthBarImages[i].SetActive(false);
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetEnabled(true);
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
 
@@ -207,15 +207,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].tintColor = healthColors[1];
+                //castleHealthBarImages[i].tintColor = healthColors[1];
 
                 if (i > avaibleBars)
                 {
-                    castleHealthBarImages[i].SetEnabled(false);
+                    castleHealthBarImages[i].SetActive(false);
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetEnabled(true);
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -223,15 +223,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].tintColor = healthColors[2];
+                //castleHealthBarImages[i].tintColor = healthColors[2];
 
                 if (i > avaibleBars)
                 {
-                    castleHealthBarImages[i].SetEnabled(false);
+                    castleHealthBarImages[i].SetActive(false);
                 }
                 else
                 {
-                    playerHealthBarImages[i].SetEnabled(true);
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
         }

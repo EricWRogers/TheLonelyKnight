@@ -326,6 +326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WTimer: 10
+  SpawnWidth: 75
+  SpawnHeight: 25
   center: {fileID: 0}
   enemy: {fileID: 0}
   enemy2: {fileID: 0}
