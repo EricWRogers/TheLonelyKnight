@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class Castle : MonoBehaviour
 {
-    public Animator animator;
-
-    
 
 }
