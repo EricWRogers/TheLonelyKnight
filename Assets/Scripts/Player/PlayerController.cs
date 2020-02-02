@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, forward, out hit, 10))
             {
-                Debug.Log(hit.transform.tag);
 
                 if (hit.transform.tag == "Enemy")
                 {
