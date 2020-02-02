@@ -56,9 +56,9 @@ public class UIManager : MonoBehaviour
             PlayerHealthBar(GameManager.Instance.playrHealth);
         }
 
-        if (GameManager.Instance.CstlHealth != prevCastleHealth)
+        if (GameManager.Instance.castleHealth != prevCastleHealth)
         {
-            CastleHealthBar(GameManager.Instance.CstlHealth);
+            CastleHealthBar(GameManager.Instance.castleHealth);
         }
         if (GameManager.Instance.scrapCount != scrapAmount)
         {
