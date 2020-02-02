@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         CastleHealth = 100f;
 
         originalWTimer = WTimer;
-        waveState = WaveState.None;
+        //waveState = WaveState.None;
         CastleHealth = OriginalCastleHealth;
         WaitedTimer = OrigWaitedTime;
     }
@@ -166,6 +166,9 @@ public class GameManager : MonoBehaviour
             case WaveState.WaveEnd:
                 SateWaveEnd();
                 break;
+
+            default:
+            break;
         }
     }
 
@@ -173,7 +176,7 @@ public class GameManager : MonoBehaviour
     void StateResting()
     {
         WTimer -= Time.deltaTime;
-
+        Debug.Log(WTimer);
         if (WTimer < 0)
         {
             waveState = WaveState.WaveStart;
@@ -242,7 +245,6 @@ public class GameManager : MonoBehaviour
             NumberEnemiesCurrentlySpawned++;
             NumberEnemiesToSpawn--;
         }
-
         if (NumberEnemiesCurrentlySpawned <= 0)
         {
             waveState = WaveState.WaveEnd;
@@ -299,12 +301,14 @@ public class GameManager : MonoBehaviour
 
         if (plyrHurt == true)
         {
-            WTimer = originalWTimer;
+            WaitedTimer = OrigWaitedTime;
         }
 
-        if (WaitedTimer < 0)
-        {
-            PlayerHealth += 0.5f;
+        if(PlayerHealth < 100){
+            if (WaitedTimer < 0)
+            {
+                PlayerHealth += 0.5f;
+            }
         }
 
     }
