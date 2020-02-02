@@ -25,7 +25,6 @@ public class EnemyHealth : MonoBehaviour
     void Start ()
     {
         // Setting up the references.
-        Debug.Log("Starting UP enemy Health");
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
         meshCollider = GetComponent <MeshCollider> ();
@@ -68,7 +67,6 @@ public class EnemyHealth : MonoBehaviour
         if(currentHealth <= 0)
         {
             Instantiate(Scrap,this.transform, true);
-            Debug.Log("Instantiate");
             // ... the enemy is dead.
             Death ();
         }
@@ -77,7 +75,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
-        Debug.Log("Made it here.");
         GameManager.Instance.OnAIDeath();
         meshCollider.isTrigger = true;
         // The enemy is dead.
@@ -102,7 +99,6 @@ public class EnemyHealth : MonoBehaviour
         rigidbody.isKinematic  = true;
         // The enemy should no sink.
         isSinking = true;
-        Debug.Log("should be sinking");
         // After 2 seconds destory the enemy.
         Destroy (gameObject, 6f);
     }
