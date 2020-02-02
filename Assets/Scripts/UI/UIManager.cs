@@ -31,8 +31,12 @@ public class UIManager : MonoBehaviour
     private float prevPlayerHealth = 100f;
     private float prevCastleHealth = 100f;
 
+    public TMP_Text playerHealthText;
+    public TMP_Text castleHealthText;
+
     [Header("Settings")]
     public GameObject settingsPanel;
+    public int alreadyPressed = 0;
 
     [Header("StartMenu")]
     public GameObject startMenu;
@@ -51,14 +55,17 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (GameManager.Instance.playrHealth != prevPlayerHealth)
         {
-            PlayerHealthBar(GameManager.Instance.playrHealth);
+            playerHealthText.text = "" + GameManager.Instance.playrHealth;
+            //PlayerHealthBar(GameManager.Instance.playrHealth);
         }
 
         if (GameManager.Instance.castleHealth != prevCastleHealth)
         {
-            CastleHealthBar(GameManager.Instance.castleHealth);
+            castleHealthText.text = "" + GameManager.Instance.castleHealth;
+            //CastleHealthBar(GameManager.Instance.castleHealth);
         }
         if (GameManager.Instance.scrapCount != scrapAmount)
         {
@@ -66,6 +73,18 @@ public class UIManager : MonoBehaviour
             scrapText.text = "" + scrapAmount;
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (alreadyPressed > 0)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                OpenSettings();
+                alreadyPressed++;
+            }
+        }
     }
 
     public void PlayerHealthBar(float health)
@@ -85,7 +104,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[0];
+                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[0];
 
                 if (i > avaibleBars)
                 {
@@ -98,7 +117,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[1];
+                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[1];
 
                 if (i > avaibleBars)
                 {
@@ -110,7 +129,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[2];
+                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[2];
 
                 if (i > avaibleBars)
                 {
@@ -138,7 +157,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[0];
+                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[0];
 
                 if (i > avaibleBars)
                 {
@@ -151,7 +170,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[1];
+                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[1];
 
                 if (i > avaibleBars)
                 {
@@ -163,7 +182,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[2];
+                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[2];
 
                 if (i > avaibleBars)
                 {
@@ -188,6 +207,7 @@ public class UIManager : MonoBehaviour
     }
     public void ResumeGame()
     {
+        alreadyPressed = 0;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
         settingsPanel.SetActive(false);
@@ -198,6 +218,7 @@ public class UIManager : MonoBehaviour
     }
     public void GoToStartMenu()
     {
+        alreadyPressed = 0;
         Time.timeScale = 1;
         startMenu.SetActive(true);
         hudPanel.SetActive(false);
