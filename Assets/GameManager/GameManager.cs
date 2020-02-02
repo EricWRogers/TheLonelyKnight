@@ -143,6 +143,7 @@ public class GameManager : MonoBehaviour
     {
         StateChanger();
         PlayerWaitedRestore();
+        Debug.Log(scrapCount);
     }
 
     //-------------------------------------------------------------------------------------
