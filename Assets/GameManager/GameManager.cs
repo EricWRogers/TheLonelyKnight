@@ -291,6 +291,9 @@ public class GameManager : MonoBehaviour
         if(playrHealth > 0)
         {
             PlayerHealth -= num;
+        }else
+        {
+            m_Death.Invoke();
         }
         plyrHurt = true;
     }

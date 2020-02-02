@@ -287,7 +287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &317481868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1175,7 +1175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1743509687
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1248,7 +1248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1799091190
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1321,7 +1321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1869347006
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2489,6 +2489,40 @@ MonoBehaviour:
   instructionText: {fileID: 4797941763054666942}
   playerHealthBarAnim: {fileID: 4873935449306927913}
   castleHealthBarAnim: {fileID: 4873935449306927875}
+  playerHealthBarImages:
+  - {fileID: 4873935448677143380}
+  - {fileID: 4873935449330465055}
+  - {fileID: 4873935448579165253}
+  - {fileID: 4873935448714460263}
+  - {fileID: 4873935448621243701}
+  - {fileID: 4873935448142718976}
+  - {fileID: 4873935448734248278}
+  - {fileID: 4873935448759229237}
+  - {fileID: 4873935448954625989}
+  - {fileID: 4873935450203740576}
+  - {fileID: 4873935448169325878}
+  - {fileID: 4873935448594751390}
+  - {fileID: 4873935449551559166}
+  - {fileID: 4873935448591807293}
+  - {fileID: 4873935449253206146}
+  - {fileID: 4873935448189812406}
+  castleHealthBarImages:
+  - {fileID: 4873935449163320758}
+  - {fileID: 4873935449198292065}
+  - {fileID: 4873935448964183044}
+  - {fileID: 4873935450059148921}
+  - {fileID: 4873935449235855427}
+  - {fileID: 4873935449213253785}
+  - {fileID: 4873935449321788908}
+  - {fileID: 4873935449489874655}
+  - {fileID: 4873935449282407328}
+  - {fileID: 4873935449644276065}
+  - {fileID: 4873935448260696718}
+  - {fileID: 4873935448847381136}
+  - {fileID: 4873935449604433297}
+  - {fileID: 4873935449564429149}
+  - {fileID: 4873935448678203287}
+  - {fileID: 4873935449651658816}
   healthColors:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: 1, b: 0, a: 1}

@@ -138,6 +138,7 @@ MonoBehaviour:
   bulletSpeed: 0
   radius: 10
   force: 10
+  particle: {fileID: 0}
 --- !u!114 &7507991376761434177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +166,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033763206684659961}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: 0
   m_Radius: 5.43
   m_Speed: 8
   m_Acceleration: 8

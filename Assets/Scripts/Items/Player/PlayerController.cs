@@ -43,7 +43,9 @@ public class PlayerController : MonoBehaviour
         characterControllerGO = GetComponent<CharacterController>();
     }
 
-    void FixedUpdate()
+
+
+    void Update()
     {
         // Only need to update is the player is on the ground.
         if (characterControllerGO.isGrounded)
@@ -117,18 +119,10 @@ public class PlayerController : MonoBehaviour
 
     void FireWeapon()
     {
-        if(Input.GetButton("Shoot"))
+        if(Input.GetButtonDown("Shoot"))
         {
             GameObject bulletClone =  Instantiate(bullet, bulletHolder.position, bulletHolder.rotation);
-            bulletClone.GetComponent<Rigidbody>().AddForce(0, 0, bulletSpeed, ForceMode.Impulse);
-
-            if (Physics.Raycast(bulletHolder.position, forward, out hit, 150))
-            {
-                if(hit.transform.tag == "Enemy")
-                {
-                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
-                }
-            }
+            bulletClone.GetComponent<Rigidbody>().AddForce(bulletSpeed, 0, 0, ForceMode.Impulse);
         }
     }
 
@@ -164,6 +158,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Display message to player to repair
                 UIManager.Instance.ToastPopUp(scrapRepairCost);
+
                 if (Input.GetButton("Interact"))
                 {
                     GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
