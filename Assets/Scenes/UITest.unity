@@ -325,7 +325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09582d8c189fda589b0783f682bd885c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OriginalCastleHealth: 0
   center: {fileID: 0}
   enemy: {fileID: 0}
   enemy2: {fileID: 0}
@@ -333,10 +332,15 @@ MonoBehaviour:
   WTimer: 10
   waveState: 0
   SpawnCap: 40
+  PlayerHealth: 0
+  CastleHealth: 0
   m_Death:
     m_PersistentCalls:
       m_Calls: []
   m_Messages:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ResetingUiUpdate:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1769988452
