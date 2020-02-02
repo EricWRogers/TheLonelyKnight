@@ -357,6 +357,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RepairCastleHealth()
+    {
+        CastleHealth = OriginalCastleHealth;
+    }
+
 }
 [System.Serializable]
 public class OnDeath : UnityEngine.Events.UnityEvent{ }

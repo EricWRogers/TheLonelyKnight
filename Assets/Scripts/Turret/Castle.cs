@@ -6,13 +6,19 @@ public class Castle : MonoBehaviour
 {
     public float scrapRepairCost = 20;
 
+    bool ifInTrigger = false;
+
     void Update()
     {
-        if (Input.GetButton("Interact"))
+        if(ifInTrigger)
         {
-            GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
-            RepairCastle();
+            if (Input.GetButton("Interact"))
+            {
+                GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
+                RepairCastle();
+            }
         }
+
     }
 
     void RepairCastle()
@@ -22,14 +28,19 @@ public class Castle : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
-        if (hitTower.transform.tag == "Player")
+        if (other.transform.tag == "Player")
         {
             UIManager.Instance.ToastPopUp(scrapRepairCost);
+            ifInTrigger = true;
         }
     }
 
     void OnTriggerExit(Collider other) 
     {
-        
+        if (other.transform.tag == "Player")
+        {
+            UIManager.Instance.CloseToastPopUp();
+            ifInTrigger = false;
+        }
     }
 }
