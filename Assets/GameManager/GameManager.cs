@@ -5,28 +5,34 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-
+    //A public variable to retain the max Castle health.
     public float OriginalCastleHealth;
 
+    //A transform for AI placement purposes.
     public Transform center;
 
     //Create gameobjects to hold the three types of enemies we will be instantiating.
     public GameObject enemy, enemy2, enemy3;
 
+    //A bool to keep track of the moment the player gets hurts.
     private bool plyrHurt;
 
+    //An int to keep track of an index number for randomized enemy placement.
     private int RndEnemy;
 
+    //Three Vector3s to keep Enemy AIs seperate.
     private Vector3 TempPosition, TempPositionTwo, TempPositionThree;
 
     //Wave Timer for counting down the 2 minutes inbetween waves.
     public float WTimer = 10;
 
+    //A Timer for the Wave that keeps the max amount of Time inbetween waves.
     private float originalWTimer;
 
     //Set up WaveNumber we are on.
     //Initially Wave Number is set to zero at start because we wait two minutes before the first wave.
     private int waveNumber = 0;
+
 
     public int WaveNumber { get { return waveNumber; } }
 
@@ -36,6 +42,7 @@ public class GameManager : MonoBehaviour
     //Set up private int value for the current number of enemies we have spawned.
     private int NumberEnemiesCurrentlySpawned = 0;
 
+    //Created an enum to keep track of the state machine.
     public enum WaveState
     {
         Resting,
@@ -45,11 +52,15 @@ public class GameManager : MonoBehaviour
         None
     };
 
+    //Serialized the private waveState.
     [SerializeField] private WaveState waveState;
 
+    //Get Function for the WaveState enum.
     public WaveState WaveStateHolder { get { return waveState; } }
 
+    //The int max number of enemy spawns at any given time.
     public int SpawnCap = 40;
+
     //Creates a new event.
     public UnityEvent m_Death = new UnityEvent();
     public UnityEvent m_Messages = new UnityEvent();
@@ -65,7 +76,10 @@ public class GameManager : MonoBehaviour
     private float Turret3;
     private float Turret4;
 
+    //A Timer value for the Max number of time before the player starts to heal.
     private float OrigWaitedTime = 10;
+
+    //The timer which counts down the time until the player is ready to heal.
     private float WaitedTimer = 0;
 
     //The private float value of player's health.
@@ -89,8 +103,10 @@ public class GameManager : MonoBehaviour
     //The public float value which gets the private float value of PlayerHealth.
     public float CstlHealth { get { return CastleHealth; } }
 
+    //Created Instance of the Game Manager.
     public static GameManager Instance { get; private set; } = null;
 
+    //Destroy the instance.
     private void Awake()
     {
         if (Instance == null)
@@ -104,6 +120,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Start Function
     void Start()
     {
         //Listeners for generic functions
@@ -120,6 +137,7 @@ public class GameManager : MonoBehaviour
     }
 
 
+    //Update Function
     void Update()
     {
         StateChanger();
@@ -128,6 +146,7 @@ public class GameManager : MonoBehaviour
 
     //-------------------------------------------------------------------------------------
 
+    //the function which changes the state manager using a switch statements.
     void StateChanger()
     {
         switch (waveState)
@@ -150,6 +169,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //The Resting State of the game.
     void StateResting()
     {
         WTimer -= Time.deltaTime;
@@ -161,12 +181,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    //The Starting state of the wave.
     void StaeWaveStart()
     {
         NumberEnemiesToSpawn = waveNumber * 4 + 2;
         waveState = WaveState.Spawning;
     }
 
+    //The Spawning State of the wave.
     void SateSpawning()
     {
         if(center != null)
@@ -179,6 +202,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    //The Final State of the wave.
     void SateWaveEnd()
     {
         waveNumber++;
@@ -186,12 +210,12 @@ public class GameManager : MonoBehaviour
         waveState = WaveState.Resting;
     }
 
+    //Function where we actually spawn randomized enemies.
     void Spawn()
     {
         while (NumberEnemiesToSpawn > 0 && NumberEnemiesCurrentlySpawned < SpawnCap)
         {
             RndEnemy = Random.Range(1, 4);
-            Debug.Log(RndEnemy);
 
             switch (RndEnemy)
             {
@@ -226,12 +250,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    //An Event for death.
     void MyAction()
     {
         //Handle the death screen popup here.
 
     }
 
+    //An Event for messages.
     void MyMessages()
     {
         //handle all the messages in the game here.
