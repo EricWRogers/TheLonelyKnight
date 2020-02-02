@@ -42,6 +42,9 @@ public class UIManager : MonoBehaviour
     public GameObject hudPanel;
     public GameObject optionsPanel;
 
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
+
     public static UIManager Instance { get; private set; } = null;
 
     //Destroy the instance.
@@ -103,6 +106,11 @@ public class UIManager : MonoBehaviour
             if (GameManager.Instance.WTimer > 0)
             {
                 waveText.text = "Wave " + GameManager.Instance.WaveNumber + " incoming... " + (int)GameManager.Instance.WTimer;
+            }
+            if (GameManager.Instance.WaveStateHolder == GameManager.WaveState.WaveStart)
+            {
+                waveCountDown = false;
+                wavePanel.SetActive(false);
             }
         }
     }
@@ -277,10 +285,17 @@ public class UIManager : MonoBehaviour
         startMenu.SetActive(false);
         hudPanel.SetActive(true);
     }
+    public void GameOver()
+    {
+        gameOverPanel.SetActive(true);
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
+    }
 
     public void WaveIncoming()
     {
         waveCountDown = true;
         wavePanel.SetActive(true);
     }
+
 }

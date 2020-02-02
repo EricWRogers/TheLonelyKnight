@@ -131,37 +131,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3366952055859923439, guid: e548675e3b0282b468492a87797071a8,
         type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 2849300150060901490, guid: 5ebe58fd31579934c9755cc9d48cfac9,
-        type: 3}
-    - target: {fileID: 3366952055859923439, guid: e548675e3b0282b468492a87797071a8,
-        type: 3}
-      propertyPath: enemy2
-      value: 
-      objectReference: {fileID: 2849300150060901490, guid: 5ebe58fd31579934c9755cc9d48cfac9,
-        type: 3}
-    - target: {fileID: 3366952055859923439, guid: e548675e3b0282b468492a87797071a8,
-        type: 3}
       propertyPath: center
       value: 
       objectReference: {fileID: 2052991635}
     - target: {fileID: 3366952055859923439, guid: e548675e3b0282b468492a87797071a8,
         type: 3}
-      propertyPath: enemy3
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6033763206684659961, guid: a11cc1553f3a0014bbb51b143fdb3448,
-        type: 3}
+      objectReference: {fileID: 1979728273}
     - target: {fileID: 3366952055859923439, guid: e548675e3b0282b468492a87797071a8,
         type: 3}
-      propertyPath: SpawnWidth
-      value: 10
-      objectReference: {fileID: 0}
+      propertyPath: restingWaveStateActive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1979728273}
     - target: {fileID: 3366952055859923439, guid: e548675e3b0282b468492a87797071a8,
         type: 3}
-      propertyPath: SpawnHeight
-      value: 30
-      objectReference: {fileID: 0}
+      propertyPath: m_ResetingUiUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1979728273}
     - target: {fileID: 5249514750265357364, guid: e548675e3b0282b468492a87797071a8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -572,74 +559,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 116643389, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 116643389, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 116643389, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 116643389, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 595882063, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 595882063, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 595882063, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 595882063, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 926499839, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 926499839, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 926499839, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 926499839, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 933306660, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 933306660, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 933306660, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 933306660, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 933306660, guid: b6c6f860250f6df6a853a1154ebe1a96, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4873935448138750025, guid: b6c6f860250f6df6a853a1154ebe1a96,
         type: 3}
       propertyPath: m_Name
@@ -1105,10 +1024,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 96663951, guid: 2e09bdda3b7c3224d82e874b9427e36c, type: 3}
-      propertyPath: towerActiveOnStart
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2185679937017680075, guid: 2e09bdda3b7c3224d82e874b9427e36c,
         type: 3}
       propertyPath: m_Name
@@ -1828,6 +1743,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c28dec451ef58f4a1b9196b70e04f3fb, type: 3}
+--- !u!114 &1979728273 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2025026303668218803, guid: b6c6f860250f6df6a853a1154ebe1a96,
+    type: 3}
+  m_PrefabInstance: {fileID: 723265301}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1f17f375966df9fae55ad7991f4036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1986518574
 PrefabInstance:
   m_ObjectHideFlags: 0
