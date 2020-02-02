@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
     void StateResting()
     {
         WTimer -= Time.deltaTime;
+        
         if (WTimer < 0)
         {
             waveState = WaveState.WaveStart;
@@ -301,6 +302,19 @@ public class GameManager : MonoBehaviour
     public void CastleDamageTaken(float num)
     {
         CastleHealth -= num;
+    }
+
+    //Castle takes damage function.
+    public void CastleDamageIsHere(float num)
+    {
+        if(num > castleHealth)
+        {
+            //GameOver
+            m_Death.Invoke();
+
+        } else if(castleHealth > 0){
+            CastleHealth -= num;
+        }
     }
 
     //A function to alot a certain time after the player hasn't gotten hurt to begin to heal and gain health.
