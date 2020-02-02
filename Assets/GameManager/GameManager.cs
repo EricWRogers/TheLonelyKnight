@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
     void StateResting()
     {
         WTimer -= Time.deltaTime;
+        
         if (WTimer < 0)
         {
             waveState = WaveState.WaveStart;
