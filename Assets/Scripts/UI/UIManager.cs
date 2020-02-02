@@ -7,8 +7,8 @@ public class UIManager : MonoBehaviour
 {
 
     [Header("Scrape")]
-    public TMP_Text scrapeText;
-    private float scrapeAmount = 0f;
+    public TMP_Text scrapText;
+    private float scrapAmount = 0f;
 
     [Header("Waves")]
     public GameObject wavePanel;
@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Toast")]
     public GameObject toastOB;
-    public TMP_Text scrapeRequiredText;
+    public TMP_Text scrapRequiredText;
     public TMP_Text instructionText;
 
     [Header("Health Bars")]
@@ -51,19 +51,19 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.PlyrHealth != prevPlayerHealth)
+        if (GameManager.Instance.playrHealth != prevPlayerHealth)
         {
-            PlayerHealthBar(GameManager.Instance.PlyrHealth);
+            PlayerHealthBar(GameManager.Instance.playrHealth);
         }
 
-        if (GameManager.Instance.CstlHealth != prevCastleHealth)
+        if (GameManager.Instance.castleHealth != prevCastleHealth)
         {
-            CastleHealthBar(GameManager.Instance.CstlHealth);
+            CastleHealthBar(GameManager.Instance.castleHealth);
         }
-        if (GameManager.Instance.scrpcont != scrapeAmount)
+        if (GameManager.Instance.scrapCount != scrapAmount)
         {
-            scrapeAmount = GameManager.Instance.scrpcont;
-            scrapeText.text = "" + scrapeAmount;
+            scrapAmount = GameManager.Instance.scrapCount;
+            scrapText.text = "" + scrapAmount;
         }
 
     }
@@ -175,18 +175,20 @@ public class UIManager : MonoBehaviour
     }
     public void ToastPopUp(float scrapeAmount)
     {
-        scrapeRequiredText.text = "" + scrapeAmount;
+        scrapRequiredText.text = "" + scrapeAmount;
         instructionText.text = "Press E to upgrade";
         toastOB.SetActive(true);
     }
 
     public void OpenSettings()
     {
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
         settingsPanel.SetActive(true);
     }
     public void ResumeGame()
     {
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
         settingsPanel.SetActive(false);
     }
@@ -202,6 +204,7 @@ public class UIManager : MonoBehaviour
     }
     public void StartButton()
     {
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         startMenu.SetActive(false);
         hudPanel.SetActive(true);
     }
