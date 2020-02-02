@@ -55,8 +55,9 @@ public class PlayerController : MonoBehaviour
             Jump();
             Sprinting();
             FireWeapon();
-            TowerInteract();
         }
+
+        TowerInteract();
 
         // Needed to apply moveDirection to the characterController.
         moveDirection.y -= gravity * Time.deltaTime;
@@ -128,8 +129,10 @@ public class PlayerController : MonoBehaviour
 
     void TowerInteract()
     {
-        if (Physics.Raycast(transform.position, forward, out hitTower, 3))
+        if (Physics.Raycast(transform.position, forward, out hitTower, 5f))
         {
+            Debug.Log(hitTower);
+
             if (hitTower.transform.tag == "Tower")
             {
                 if (hitTower.transform.GetComponent<Tower>().towerActiveOnStart)
@@ -188,7 +191,7 @@ public class PlayerController : MonoBehaviour
         forward = transform.TransformDirection(Vector3.forward) * 20;
         Debug.DrawRay(bulletHolder.position, forward, Color.green);
 
-        forward = transform.TransformDirection(Vector3.forward) * 3;
+        forward = transform.TransformDirection(Vector3.forward) * 3f;
         Debug.DrawRay(transform.position, forward, Color.red);
 	}
 }
