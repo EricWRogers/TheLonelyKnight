@@ -10,8 +10,7 @@ public class Enemy_AI : MonoBehaviour
 
     Animator anim;          
     Transform enemy;                 
-    GameObject player;                         
-    GameManager gameManager;                 
+    GameObject player;                                         
     EnemyHealth enemyHealth;                  
     bool playerInRange;                         
     float timer;                                
@@ -92,10 +91,9 @@ public class Enemy_AI : MonoBehaviour
             BlowUp();
         }
 
-        if(gameManager.PlyrHealth > 0)
+        if(GameManager.Instance.playrHealth > 0)
         {
-           
-            gameManager.PlayerDamageTaken(attackDamage);
+            GameManager.Instance.PlayerDamageTaken(attackDamage);
         } 
     }
     void Flee()
