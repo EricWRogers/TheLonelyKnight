@@ -31,6 +31,9 @@ public class UIManager : MonoBehaviour
     private float prevPlayerHealth = 100f;
     private float prevCastleHealth = 100f;
 
+    public TMP_Text playerHealthText;
+    public TMP_Text castleHealthText;
+
     [Header("Settings")]
     public GameObject settingsPanel;
 
@@ -51,14 +54,17 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (GameManager.Instance.playrHealth != prevPlayerHealth)
         {
-            PlayerHealthBar(GameManager.Instance.playrHealth);
+            playerHealthText.text = "" + GameManager.Instance.playrHealth;
+            //PlayerHealthBar(GameManager.Instance.playrHealth);
         }
 
         if (GameManager.Instance.castleHealth != prevCastleHealth)
         {
-            CastleHealthBar(GameManager.Instance.castleHealth);
+            castleHealthText.text = "" + GameManager.Instance.castleHealth;
+            //CastleHealthBar(GameManager.Instance.castleHealth);
         }
         if (GameManager.Instance.scrapCount != scrapAmount)
         {
@@ -85,7 +91,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[0];
+                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[0];
 
                 if (i > avaibleBars)
                 {
@@ -98,7 +104,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[1];
+                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[1];
 
                 if (i > avaibleBars)
                 {
@@ -110,7 +116,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[2];
+                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[2];
 
                 if (i > avaibleBars)
                 {
@@ -138,7 +144,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[0];
+                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[0];
 
                 if (i > avaibleBars)
                 {
@@ -151,7 +157,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[1];
+                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[1];
 
                 if (i > avaibleBars)
                 {
@@ -163,7 +169,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].GetComponent<Image>().tintColor = healthColors[2];
+                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[2];
 
                 if (i > avaibleBars)
                 {
