@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 
         originalWTimer = WTimer;
         waveState = WaveState.None;
-        CastleHealth = OriginalCastleHealth;
+        OriginalCastleHealth=CastleHealth;
         WaitedTimer = OrigWaitedTime;
     }
 
