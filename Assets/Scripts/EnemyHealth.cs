@@ -67,7 +67,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
-        Instantiate(Scrap,this.transform);
+        Instantiate(Scrap,this.transform, true);
         GameManager.Instance.OnAIDeath();
         capsuleCollider.isTrigger = true;
         // The enemy is dead.
