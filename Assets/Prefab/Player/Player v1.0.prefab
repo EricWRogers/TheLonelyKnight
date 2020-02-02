@@ -732,8 +732,10 @@ MonoBehaviour:
   speedBoost: 2
   scrapRepairCost: 200
   scrapActaveCost: 250
+  bulletSpeed: 10
   DamageToEnemy: 15
   bulletHolder: {fileID: 2434970739417874978}
+  bullet: {fileID: 4929646148769994817, guid: 4c94495042c80f045a3176afb7d5ce62, type: 3}
 --- !u!1 &4898042770346527260
 GameObject:
   m_ObjectHideFlags: 0
