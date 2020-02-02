@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9944774057a771e4eac3d74f7319b77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 45
+  startingHealth: 50
   currentHealth: 0
   sinkSpeed: 2.5
   deathClip: {fileID: 0}
