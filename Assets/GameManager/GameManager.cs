@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     //A public variable to retain the max Castle health.
-    public float OriginalCastleHealth;
+    private float OriginalCastleHealth;
 
     //A transform for AI placement purposes.
     public Transform center;
@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour
     //Set up WaveNumber we are on.
     //Initially Wave Number is set to zero at start because we wait two minutes before the first wave.
     private int waveNumber = 0;
-
-
     public int WaveNumber { get { return waveNumber; } }
 
     //Set up int for the number of enemies we are spawning.
@@ -61,12 +59,7 @@ public class GameManager : MonoBehaviour
     //The int max number of enemy spawns at any given time.
     public int SpawnCap = 40;
 
-    //Creates a new event.
-    public UnityEvent m_Death = new UnityEvent();
-    public UnityEvent m_Messages = new UnityEvent();
-
     //The private float value of scrap parts the player collects to fix things.
-
 
     private float ScrapCount;
 
@@ -101,7 +94,13 @@ public class GameManager : MonoBehaviour
     public float playrHealth { get { return PlayerHealth; } }
 
     //The public float value which gets the private float value of PlayerHealth.
-    public float CstlHealth { get { return CastleHealth; } }
+    public float castleHealth { get { return CastleHealth; } }
+
+    //Creates a new event.
+    public UnityEvent m_Death = new UnityEvent();
+    public UnityEvent m_Messages = new UnityEvent();
+
+    public UnityEvent m_ResetingUiUpdate = new UnityEvent();
 
     //Created Instance of the Game Manager.
     public static GameManager Instance { get; private set; } = null;
@@ -129,9 +128,10 @@ public class GameManager : MonoBehaviour
 
         waveNumber = 1;
         PlayerHealth = 100f;
+        CastleHealth = 100f;
 
         originalWTimer = WTimer;
-        waveState = WaveState.Resting;
+        waveState = WaveState.None;
         CastleHealth = OriginalCastleHealth;
         WaitedTimer = OrigWaitedTime;
     }
@@ -206,7 +206,6 @@ public class GameManager : MonoBehaviour
     void SateWaveEnd()
     {
         waveNumber++;
-
         waveState = WaveState.Resting;
     }
 
@@ -322,50 +321,8 @@ public class GameManager : MonoBehaviour
         CastleHealth -= num;
     }
 
-
-    //Turrent Health restoration.
-    public void TurrentHealthAdd(int turrentnumber, float num)
+    public void StartRestingState()
     {
-        switch (turrentnumber)
-        {
-            case 1:
-                Turret1 += num;
-                break;
-
-            case 2:
-                Turret2 += num;
-                break;
-
-            case 3:
-                Turret3 += num;
-                break;
-
-            case 4:
-                Turret4 += num;
-                break;
-        }
-    }
-
-    //Turrent health destruction.
-    public void TurrentHealthSubtract(int turrentnumber, float num)
-    {
-        switch (turrentnumber)
-        {
-            case 1:
-                Turret1 -= num;
-                break;
-
-            case 2:
-                Turret2 -= num;
-                break;
-
-            case 3:
-                Turret3 -= num;
-                break;
-
-            case 4:
-                Turret4 -= num;
-                break;
-        }
+        waveState = WaveState.Resting;
     }
 }
