@@ -73,5 +73,11 @@ public class Enemy_AI_Turtle : MonoBehaviour
     {
         particle.SetActive(true);
     }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.AddScrapToCount(3);
+        GameManager.Instance.OnAIDeath();
+    }
 }  
 

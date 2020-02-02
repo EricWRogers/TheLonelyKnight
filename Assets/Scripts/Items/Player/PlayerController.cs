@@ -158,23 +158,6 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-
-            if (hitTower.transform.tag == "Castle")
-            {
-                // Display message to player to repair
-                UIManager.Instance.ToastPopUp(scrapRepairCost);
-
-                if (Input.GetButton("Interact"))
-                {
-                    GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
-                    // hitTower.transform.GetComponent<Castle>().repairTower();
-                }
-            }
-
-            if (hitTower.transform.tag != "Tower" && hitTower.transform.tag != "Castle")
-            {
-                UIManager.Instance.CloseToastPopUp();
-            }
         }
     }
 
