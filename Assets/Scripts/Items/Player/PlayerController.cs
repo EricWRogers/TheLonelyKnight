@@ -123,7 +123,6 @@ public class PlayerController : MonoBehaviour
         {
             GameObject bulletClone =  Instantiate(bullet, bulletHolder.position, bulletHolder.rotation);
             bulletClone.GetComponent<Rigidbody>().AddForce(bulletClone.transform.right * bulletSpeed, ForceMode.Impulse);
-            BulletScript.Destroy(bullet,3.0f);
         }
     }
 

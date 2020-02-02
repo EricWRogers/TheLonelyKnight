@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1851973229246439912}
   - component: {fileID: 5750429041888239371}
   - component: {fileID: 4376907745738101650}
+  - component: {fileID: 5052506296094216019}
   m_Layer: 0
   m_Name: Platfrom
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,6 +81,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5052506296094216019
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085662993359707765}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2621431465005222750, guid: fa581fa288e42b994bdca3f566f94a5a, type: 3}
 --- !u!1 &2185679937017680075
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,9 +176,10 @@ GameObject:
   - component: {fileID: 4488476170972694610}
   - component: {fileID: 6040963986182010142}
   - component: {fileID: 4790892326614966648}
+  - component: {fileID: 1632712687094892360}
   m_Layer: 0
   m_Name: Tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,6 +245,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1632712687094892360
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4035530465098251787}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1277366460620338370, guid: fa581fa288e42b994bdca3f566f94a5a, type: 3}
 --- !u!1 &7642506083895972051
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,9 +270,10 @@ GameObject:
   - component: {fileID: 5303602453573004540}
   - component: {fileID: 1340157263669421091}
   - component: {fileID: 4651437875700955702}
+  - component: {fileID: 6732733554464180794}
   m_Layer: 0
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,6 +341,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6732733554464180794
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642506083895972051}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02410469, y: 0.024104696, z: 0.005384506}
+  m_Center: {x: -9.313226e-10, y: 0, z: 0.059307758}
 --- !u!1 &7807300218755506990
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,9 +365,10 @@ GameObject:
   - component: {fileID: 6480573631149824745}
   - component: {fileID: 3534749228500016727}
   - component: {fileID: 4945767600898062425}
+  - component: {fileID: 3996816603788211247}
   m_Layer: 0
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,6 +434,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &3996816603788211247
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7807300218755506990}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3909233067320746374, guid: fa581fa288e42b994bdca3f566f94a5a, type: 3}
 --- !u!1 &7887198523467622641
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +552,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 3968723550280008124, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tower
+      objectReference: {fileID: 0}
     - target: {fileID: 4073687905224803823, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -562,6 +626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588609715109299901, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 635128b5aeb141f6f9eebfbe3dd52fea, type: 3}
