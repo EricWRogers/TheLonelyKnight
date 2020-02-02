@@ -8,11 +8,12 @@ public class UIManager : MonoBehaviour
 
     [Header("Scrape")]
     public TMP_Text scrapText;
-    private float scrapAmount = 0f;
+    private float prevScrapAmount = 0f;
 
     [Header("Waves")]
     public GameObject wavePanel;
     public TMP_Text waveText;
+    private bool waveCountDown = false;
 
     [Header("Toast")]
     public GameObject toastOB;
@@ -43,7 +44,20 @@ public class UIManager : MonoBehaviour
     public GameObject hudPanel;
     public GameObject optionsPanel;
 
+    public static UIManager Instance { get; private set; } = null;
 
+    //Destroy the instance.
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -67,10 +81,10 @@ public class UIManager : MonoBehaviour
             castleHealthText.text = "" + GameManager.Instance.castleHealth;
             //CastleHealthBar(GameManager.Instance.castleHealth);
         }
-        if (GameManager.Instance.scrapCount != scrapAmount)
+        if (GameManager.Instance.scrapCount != prevScrapAmount)
         {
-            scrapAmount = GameManager.Instance.scrapCount;
-            scrapText.text = "" + scrapAmount;
+            prevScrapAmount = GameManager.Instance.scrapCount;
+            scrapText.text = "" + prevScrapAmount;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -83,6 +97,14 @@ public class UIManager : MonoBehaviour
             {
                 OpenSettings();
                 alreadyPressed++;
+            }
+        }
+
+        if (waveCountDown)
+        {
+            if (GameManager.Instance.WTimer > 0)
+            {
+                waveText.text = "Wave " + GameManager.Instance.WaveNumber + " incoming... " + (int)GameManager.Instance.WTimer;
             }
         }
     }
@@ -192,11 +214,15 @@ public class UIManager : MonoBehaviour
         }
 
     }
-    public void ToastPopUp(float scrapeAmount)
+    public void ToastPopUp(float scrapAmount)
     {
-        scrapRequiredText.text = "" + scrapeAmount;
-        instructionText.text = "Press E to upgrade";
+        scrapRequiredText.text = "" + scrapAmount;
+        instructionText.text = "Press E to repair";
         toastOB.SetActive(true);
+    }
+    public void CloseToastPopUp()
+    {
+        toastOB.SetActive(false);
     }
 
     public void OpenSettings()
@@ -219,15 +245,22 @@ public class UIManager : MonoBehaviour
     public void GoToStartMenu()
     {
         alreadyPressed = 0;
-        Time.timeScale = 1;
         startMenu.SetActive(true);
         hudPanel.SetActive(false);
         settingsPanel.SetActive(false);
     }
     public void StartButton()
     {
+        Time.timeScale = 1;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        GameManager.Instance.StartRestingState();
         startMenu.SetActive(false);
         hudPanel.SetActive(true);
+    }
+
+    public void WaveIncoming()
+    {
+        waveCountDown = true;
+        wavePanel.SetActive(true);
     }
 }

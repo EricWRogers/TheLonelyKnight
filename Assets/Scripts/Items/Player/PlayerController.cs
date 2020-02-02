@@ -12,9 +12,13 @@ public class PlayerController : MonoBehaviour
     public float scrapRepairCost = 200f;
     public float scrapActaveCost = 250f;
 
+    public float bulletSpeed = 10f;
+
     public int DamageToEnemy = 15;
 
     public Transform bulletHolder; 
+
+    public GameObject bullet;
 
     float originalSpeed = 0f;
     float originalGravity = 0f;
@@ -113,17 +117,16 @@ public class PlayerController : MonoBehaviour
 
     void FireWeapon()
     {
-        if(GameManager.Instance.WaveStateHolder  != GameManager.WaveState.None)
+        if(Input.GetButton("Shoot"))
         {
-            if(Input.GetButton("Shoot"))
+            GameObject bulletClone =  Instantiate(bullet, bulletHolder.position, bulletHolder.rotation);
+            bulletClone.GetComponent<Rigidbody>().AddForce(0, 0, bulletSpeed, ForceMode.Impulse);
+
+            if (Physics.Raycast(bulletHolder.position, forward, out hit, 150))
             {
-                if (Physics.Raycast(bulletHolder.position, forward, out hit, 150))
+                if(hit.transform.tag == "Enemy")
                 {
-                    if(hit.transform.tag == "Enemy")
-                    {
-                        hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
-                        
-                    }
+                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
                 }
             }
         }
@@ -131,14 +134,15 @@ public class PlayerController : MonoBehaviour
 
     void TowerInteract()
     {
-        if(Physics.Raycast(transform.position, forward, out hitTower, 3))
+        if (Physics.Raycast(transform.position, forward, out hitTower, 3))
         {
-            if(hitTower.transform.tag == "Tower")
+            if (hitTower.transform.tag == "Tower")
             {
-                if(hitTower.transform.GetComponent<Tower>().towerActiveOnStart)
+                if (hitTower.transform.GetComponent<Tower>().towerActiveOnStart)
                 {
                     // Display message to player to repair
-                    if(Input.GetButton("Interact"))
+                    UIManager.Instance.ToastPopUp(scrapRepairCost);
+                    if (Input.GetButton("Interact"))
                     {
                         GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
                         hitTower.transform.GetComponent<Tower>().repairTower();
@@ -147,8 +151,8 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     // Display message to player to Actave
-
-                    if(Input.GetButton("Interact"))
+                    UIManager.Instance.ToastPopUp(scrapActaveCost);
+                    if (Input.GetButton("Interact"))
                     {
                         GameManager.Instance.SubtractScrapFromCount(scrapActaveCost);
                         hitTower.transform.GetComponent<Tower>().repairTower();
@@ -156,15 +160,20 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if(hitTower.transform.tag == "Castle")
+            if (hitTower.transform.tag == "Castle")
             {
                 // Display message to player to repair
-
-                if(Input.GetButton("Interact"))
+                UIManager.Instance.ToastPopUp(scrapRepairCost);
+                if (Input.GetButton("Interact"))
                 {
                     GameManager.Instance.SubtractScrapFromCount(scrapRepairCost);
                     // hitTower.transform.GetComponent<Castle>().repairTower();
                 }
+            }
+
+            if (hitTower.transform.tag != "Tower" && hitTower.transform.tag != "Castle")
+            {
+                UIManager.Instance.CloseToastPopUp();
             }
         }
     }
