@@ -5,12 +5,11 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public int BulletSpeed = 50;
-
     public Rigidbody rb;
 
-	void Update () 
+	void Awake () 
     {
-        
+        Destroy(this.gameObject ,3.0f);
 	}
 
     void OnTriggerEnter(Collider other) 
@@ -20,7 +19,5 @@ public class BulletScript : MonoBehaviour
 
             other.transform.GetComponent<EnemyHealth>().TakeDamage(15);
         }
-
-        //Destroy(gameObject, 1f);
     }
 }
