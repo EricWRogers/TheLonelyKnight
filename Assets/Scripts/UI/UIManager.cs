@@ -24,7 +24,6 @@ public class UIManager : MonoBehaviour
     [Header("Health Bars")]
     public Animator playerHealthBarAnim;
     public Animator castleHealthBarAnim;
-    
     public GameObject[] playerHealthBarImages;
     public GameObject[] castleHealthBarImages;
     public Color[] healthColors;
