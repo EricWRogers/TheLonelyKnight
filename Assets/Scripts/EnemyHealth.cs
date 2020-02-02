@@ -39,9 +39,10 @@ public class EnemyHealth : MonoBehaviour
     {
         if(isSinking)
         {
+
             // ... move the enemy down by the sinkSpeed per second.
             transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
-
+            isSinking = false;
         }
         //if the enemy is spawning in
         if(isRising)
@@ -50,12 +51,11 @@ public class EnemyHealth : MonoBehaviour
             transform.Translate (Vector3.up * sinkSpeed * Time.deltaTime);
         }
     }
-
-
     public void TakeDamage (int amount)
     {
+        Debug.Log("IS TakingDamage");
         currentHealth -= amount;
-        paint.Paint(this.transform.position);
+        //paint.Paint(this.transform.position);
         if(currentHealth <= 0)
         {
             Instantiate(Scrap,this.transform, true);
@@ -70,14 +70,6 @@ public class EnemyHealth : MonoBehaviour
         GameManager.Instance.OnAIDeath();
         isDead = true;
         StartSinking();
-        // Turn the collider into a trigger so shots can pass through it.
-
-        // Tell the animator that the enemy is dead.
-        //anim.SetTrigger ("Dead");
-
-        // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
-        //enemyAudio.clip = deathClip;
-        //enemyAudio.Play ();
     }
 
 
@@ -91,7 +83,7 @@ public class EnemyHealth : MonoBehaviour
         // The enemy should no sink.
         isSinking = true;
         // After 2 seconds destory the enemy.
-        Destroy (gameObject, 6f);
+        Destroy (gameObject, 2f);
     }
 }
 
