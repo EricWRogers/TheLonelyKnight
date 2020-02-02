@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
     Vector3 originalPlayerSize = Vector3.zero;
 
     CharacterController characterControllerGO;
+
     RaycastHit hit;
+    Vector3 forward;
 
     void Start()
     {
@@ -40,6 +42,9 @@ public class PlayerController : MonoBehaviour
             Sprinting();
             FireWeapon();
         }
+
+        forward = transform.TransformDirection(Vector3.forward) * 10;
+        Debug.DrawRay(transform.position, forward, Color.green);
 
         // Needed to apply moveDirection to the characterController.
         moveDirection.y -= gravity * Time.deltaTime;
@@ -106,13 +111,14 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
-            if (Physics.Raycast(transform.position, fwd, out hit, 10))
+            if (Physics.Raycast(transform.position, forward, out hit, 10))
             {
-                print(hit.transform.tag);
+                Debug.Log(hit.transform.tag);
 
                 if(hit.transform.tag == "Enemy")
                 {
                     hit.transform.GetComponent<EnemyHealth>().TakeDamage(25);
+                    
                 }
             }
         }
