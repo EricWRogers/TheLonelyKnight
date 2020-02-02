@@ -128,11 +128,10 @@ public class GameManager : MonoBehaviour
 
         waveNumber = 1;
         PlayerHealth = 100f;
-
         CastleHealth = 100f;
 
         originalWTimer = WTimer;
-        //waveState = WaveState.None;
+        waveState = WaveState.None;
         CastleHealth = OriginalCastleHealth;
         WaitedTimer = OrigWaitedTime;
     }
@@ -184,7 +183,6 @@ public class GameManager : MonoBehaviour
             WTimer = originalWTimer;
         }
     }
-
 
     //The Starting state of the wave.
     void StaeWaveStart()
@@ -252,12 +250,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     //An Event for death.
     void MyAction()
     {
         //Handle the death screen popup here.
-
     }
 
     //An Event for messages.
@@ -290,7 +286,8 @@ public class GameManager : MonoBehaviour
     //Player takes damage function.
     public void PlayerDamageTaken(float num)
     {
-        if(playrHealth > 0){
+        if(playrHealth > 0)
+        {
             PlayerHealth -= num;
         }
         plyrHurt = true;
@@ -299,15 +296,13 @@ public class GameManager : MonoBehaviour
     //A function to alot a certain time after the player hasn't gotten hurt to begin to heal and gain health.
     void PlayerWaitedRestore()
     {
-
-
-
         if (plyrHurt == true)
         {
             if(WaitedTimer > 0)
             {
                 WaitedTimer -= Time.deltaTime;
-            } else 
+            } 
+            else 
             {
                       if(PlayerHealth < 100)
                       {
@@ -317,15 +312,14 @@ public class GameManager : MonoBehaviour
                           plyrHurt = false;
                       }
             }
-
-        } else 
+        } 
+        else 
         {
             if(WaitedTimer != OrigWaitedTime)
             {
                 WaitedTimer = OrigWaitedTime;
             }
         }
-
     }
 
     //Restoring castle health.
