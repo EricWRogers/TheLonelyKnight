@@ -555,7 +555,7 @@ PrefabInstance:
     - target: {fileID: 3968723550280008124, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
         type: 3}
       propertyPath: m_TagString
-      value: Tower
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4073687905224803823, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
         type: 3}
@@ -630,19 +630,19 @@ PrefabInstance:
     - target: {fileID: 6588609715109299901, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
         type: 3}
       propertyPath: m_TagString
-      value: Tower
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 635128b5aeb141f6f9eebfbe3dd52fea, type: 3}
---- !u!1 &2593689408057513706 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3968723550280008124, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
-    type: 3}
-  m_PrefabInstance: {fileID: 1507896415078897494}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3199168022776779449 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4073687905224803823, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1507896415078897494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2593689408057513706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3968723550280008124, guid: 635128b5aeb141f6f9eebfbe3dd52fea,
     type: 3}
   m_PrefabInstance: {fileID: 1507896415078897494}
   m_PrefabAsset: {fileID: 0}
