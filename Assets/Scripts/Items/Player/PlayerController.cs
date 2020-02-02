@@ -122,7 +122,8 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Shoot"))
         {
             GameObject bulletClone =  Instantiate(bullet, bulletHolder.position, bulletHolder.rotation);
-            bulletClone.GetComponent<Rigidbody>().AddForce(bulletSpeed, 0, 0, ForceMode.Impulse);
+            bulletClone.GetComponent<Rigidbody>().AddForce(bulletClone.transform.right * bulletSpeed, ForceMode.Impulse);
+            BulletScript.Destroy(bullet,3.0f);
         }
     }
 

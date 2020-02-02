@@ -10,7 +10,7 @@ public class BulletScript : MonoBehaviour
 
 	void Update () 
     {
-        rb.position = (Vector3.right * Time.deltaTime * BulletSpeed);
+        
 	}
 
     void OnTriggerEnter(Collider other) 
