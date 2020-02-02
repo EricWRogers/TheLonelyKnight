@@ -73,7 +73,7 @@ public class PaintBlood : MonoBehaviour
 
 
                 // TODO: What do we do here? We kill them after some sec?
-                Destroy(paintSplatter.gameObject, 60);
+                Destroy(paintSplatter.gameObject, 60f);
             }
 
         }
