@@ -4,26 +4,13 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public GameObject Bullet;
-    private int Bulletx = 1000;
-    Rigidbody m_Rigidbody;
-    float m_Speed;
-
-    void Start()
+    void OnTriggerEnter(Collider other) 
     {
-    m_Rigidbody = Bullet.GetComponent<Rigidbody>();
-    m_Speed = 40.0f;
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        while(Bulletx >= 0)
+        if(other.transform.tag == "Enemy")
         {
-            m_Rigidbody.velocity = transform.up * m_Speed;
-            Bulletx--;
+            other.transform.GetComponent<EnemyHealth>().TakeDamage(15);
         }
-        
+
+        Destroy(gameObject);
     }
 }
