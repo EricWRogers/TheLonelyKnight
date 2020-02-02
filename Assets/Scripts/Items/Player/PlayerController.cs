@@ -117,18 +117,16 @@ public class PlayerController : MonoBehaviour
 
     void FireWeapon()
     {
-        if(GameManager.Instance.WaveStateHolder  != GameManager.WaveState.None)
+        if(Input.GetButton("Shoot"))
         {
-            if(Input.GetButton("Shoot"))
+            GameObject bulletClone =  Instantiate(bullet, bulletHolder.position, bulletHolder.rotation);
+            bulletClone.GetComponent<Rigidbody>().AddForce(0, 0, bulletSpeed, ForceMode.Impulse);
+
+            if (Physics.Raycast(bulletHolder.position, forward, out hit, 150))
             {
-                if (Physics.Raycast(bulletHolder.position, forward, out hit, 150))
+                if(hit.transform.tag == "Enemy")
                 {
-                    if(hit.transform.tag == "Enemy")
-                    {
-                        hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
-                        GameObject bulletClone =  Instantiate(bullet, bulletHolder.position, bulletHolder.rotation);
-                        bulletClone.GetComponent<Rigidbody>().AddForce(0, 0, bulletSpeed, ForceMode.Impulse);
-                    }
+                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(DamageToEnemy);
                 }
             }
         }
