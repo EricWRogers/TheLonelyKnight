@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a1e0d1e1729f0fcaab9b0499dd84f58a
+guid: 5f1990ecce6641d529ce256c178a37d5
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -7,22 +7,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: GUN
+      name: Sphere_Sphere_GUNMat
     second: {fileID: 2100000, guid: f949f312e2710e3b8aad81a1238af50e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Head
+      name: Sphere_Sphere_HeadMat
     second: {fileID: 2100000, guid: dc736be611affa031a416e16a3e4c2ed, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Tank
+      name: Sphere_Sphere_TankMat
     second: {fileID: 2100000, guid: 9937691d58fa643018c9ca0cfc4582af, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: TopShell
+      name: Sphere_Sphere_TopShellMat
     second: {fileID: 2100000, guid: b01f38b9cf290d93fb9b31e78b0efe65, type: 2}
   materials:
     materialImportMode: 1
