@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
 
         waveNumber = 1;
         PlayerHealth = 100f;
+
         CastleHealth = 100f;
 
         originalWTimer = WTimer;
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
     {
         StateChanger();
         PlayerWaitedRestore();
+        Debug.Log(scrapCount);
     }
 
     //-------------------------------------------------------------------------------------
@@ -176,7 +178,6 @@ public class GameManager : MonoBehaviour
     void StateResting()
     {
         WTimer -= Time.deltaTime;
-        Debug.Log(WTimer);
         if (WTimer < 0)
         {
             waveState = WaveState.WaveStart;
@@ -289,25 +290,39 @@ public class GameManager : MonoBehaviour
     //Player takes damage function.
     public void PlayerDamageTaken(float num)
     {
-        PlayerHealth -= num;
+        if(playrHealth > 0){
+            PlayerHealth -= num;
+        }
         plyrHurt = true;
     }
 
     //A function to alot a certain time after the player hasn't gotten hurt to begin to heal and gain health.
     void PlayerWaitedRestore()
     {
-        WaitedTimer -= Time.deltaTime;
+
 
 
         if (plyrHurt == true)
         {
-            WaitedTimer = OrigWaitedTime;
-        }
-
-        if(PlayerHealth < 100){
-            if (WaitedTimer < 0)
+            if(WaitedTimer > 0)
             {
-                PlayerHealth += 0.5f;
+                WaitedTimer -= Time.deltaTime;
+            } else 
+            {
+                      if(PlayerHealth < 100)
+                      {
+                        PlayerHealth += 0.5f;
+                      } else 
+                      {
+                          plyrHurt = false;
+                      }
+            }
+
+        } else 
+        {
+            if(WaitedTimer != OrigWaitedTime)
+            {
+                WaitedTimer = OrigWaitedTime;
             }
         }
 
