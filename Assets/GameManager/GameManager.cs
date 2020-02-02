@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    //A public variable to retain the max Castle health.
-    private float OriginalCastleHealth;
+    //Wave Timer for counting down the 2 minutes inbetween waves.
+    public float WTimer = 10;
 
     //A transform for AI placement purposes.
     public Transform center;
@@ -14,31 +14,8 @@ public class GameManager : MonoBehaviour
     //Create gameobjects to hold the three types of enemies we will be instantiating.
     public GameObject enemy, enemy2, enemy3;
 
-    //A bool to keep track of the moment the player gets hurts.
-    private bool plyrHurt;
-
-    //An int to keep track of an index number for randomized enemy placement.
-    private int RndEnemy;
-
-    //Three Vector3s to keep Enemy AIs seperate.
-    private Vector3 TempPosition, TempPositionTwo, TempPositionThree;
-
-    //Wave Timer for counting down the 2 minutes inbetween waves.
-    public float WTimer = 10;
-
-    //A Timer for the Wave that keeps the max amount of Time inbetween waves.
-    private float originalWTimer;
-
-    //Set up WaveNumber we are on.
-    //Initially Wave Number is set to zero at start because we wait two minutes before the first wave.
-    private int waveNumber = 0;
+    //The Number to read when needing to know what wave of enemies we are currently on.
     public int WaveNumber { get { return waveNumber; } }
-
-    //Set up int for the number of enemies we are spawning.
-    private int NumberEnemiesToSpawn = 0;
-
-    //Set up private int value for the current number of enemies we have spawned.
-    private int NumberEnemiesCurrentlySpawned = 0;
 
     //Created an enum to keep track of the state machine.
     public enum WaveState
@@ -50,14 +27,57 @@ public class GameManager : MonoBehaviour
         None
     };
 
-    //Serialized the private waveState.
-    [SerializeField] private WaveState waveState;
-
     //Get Function for the WaveState enum.
     public WaveState WaveStateHolder { get { return waveState; } }
 
+    //The public float value which gets the private float value of PlayerHealth.
+    public float playrHealth { get { return PlayerHealth; } }
+
+    //The public float value which gets the private float value of PlayerHealth.
+    public float castleHealth { get { return CastleHealth; } }
+
+    //Creates a new event.
+    public UnityEvent m_Death = new UnityEvent();
+    public UnityEvent m_Messages = new UnityEvent();
+
+    public UnityEvent m_ResetingUiUpdate = new UnityEvent();
+
+    //Created Instance of the Game Manager.
+    public static GameManager Instance { get; private set; } = null;
+
     //The int max number of enemy spawns at any given time.
     public int SpawnCap = 40;
+
+    //The public float value which gets the private float value of ScrapCount.
+    public float scrapCount { get { return ScrapCount; } }
+
+    //A public variable to retain the max Castle health.
+    private float OriginalCastleHealth;
+
+    //A bool to keep track of the moment the player gets hurts.
+    private bool plyrHurt;
+
+    //An int to keep track of an index number for randomized enemy placement.
+    private int RndEnemy;
+
+    //Three Vector3s to keep Enemy AIs seperate.
+    private Vector3 TempPosition, TempPositionTwo, TempPositionThree;
+
+    //A Timer for the Wave that keeps the max amount of Time inbetween waves.
+    private float originalWTimer;
+
+    //Set up WaveNumber we are on.
+    //Initially Wave Number is set to zero at start because we wait two minutes before the first wave.
+    private int waveNumber = 0;
+
+    //Set up int for the number of enemies we are spawning.
+    private int NumberEnemiesToSpawn = 0;
+
+    //Set up private int value for the current number of enemies we have spawned.
+    private int NumberEnemiesCurrentlySpawned = 0;
+
+    //Serialized the private waveState.
+    [SerializeField] private WaveState waveState;
 
     //The private float value of scrap parts the player collects to fix things.
 
@@ -74,24 +94,6 @@ public class GameManager : MonoBehaviour
 
     //The private float value of the castle health.
     [SerializeField] private float CastleHealth;
-
-    //The public float value which gets the private float value of ScrapCount.
-    public float scrapCount { get { return ScrapCount; } }
-
-    //The public float value which gets the private float value of PlayerHealth.
-    public float playrHealth { get { return PlayerHealth; } }
-
-    //The public float value which gets the private float value of PlayerHealth.
-    public float castleHealth { get { return CastleHealth; } }
-
-    //Creates a new event.
-    public UnityEvent m_Death = new UnityEvent();
-    public UnityEvent m_Messages = new UnityEvent();
-
-    public UnityEvent m_ResetingUiUpdate = new UnityEvent();
-
-    //Created Instance of the Game Manager.
-    public static GameManager Instance { get; private set; } = null;
 
     //Destroy the instance.
     private void Awake()
@@ -116,14 +118,15 @@ public class GameManager : MonoBehaviour
 
         waveNumber = 1;
         PlayerHealth = 100f;
-
         CastleHealth = 100f;
 
         originalWTimer = WTimer;
-        //waveState = WaveState.None;
+        waveState = WaveState.None;
         CastleHealth = OriginalCastleHealth;
         WaitedTimer = OrigWaitedTime;
     }
+
+
 
 
     //Update Function
@@ -173,7 +176,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     //The Starting state of the wave.
     void StaeWaveStart()
     {
@@ -192,13 +194,6 @@ public class GameManager : MonoBehaviour
             waveState = WaveState.None;
         }
         
-    }
-
-    //The Final State of the wave.
-    void SateWaveEnd()
-    {
-        waveNumber++;
-        waveState = WaveState.Resting;
     }
 
     //Function where we actually spawn randomized enemies.
@@ -241,11 +236,23 @@ public class GameManager : MonoBehaviour
     }
 
 
+    //The Final State of the wave.
+    void SateWaveEnd()
+    {
+        waveNumber++;
+        waveState = WaveState.Resting;
+    }
+
+    //Start the resting period.
+    public void StartRestingState()
+    {
+        waveState = WaveState.Resting;
+    }
+
     //An Event for death.
     void MyAction()
     {
         //Handle the death screen popup here.
-
     }
 
     //An Event for messages.
@@ -278,42 +285,11 @@ public class GameManager : MonoBehaviour
     //Player takes damage function.
     public void PlayerDamageTaken(float num)
     {
-        if(playrHealth > 0){
+        if(playrHealth > 0)
+        {
             PlayerHealth -= num;
         }
         plyrHurt = true;
-    }
-
-    //A function to alot a certain time after the player hasn't gotten hurt to begin to heal and gain health.
-    void PlayerWaitedRestore()
-    {
-
-
-
-        if (plyrHurt == true)
-        {
-            if(WaitedTimer > 0)
-            {
-                WaitedTimer -= Time.deltaTime;
-            } else 
-            {
-                      if(PlayerHealth < 100)
-                      {
-                        PlayerHealth += 0.5f;
-                      } else 
-                      {
-                          plyrHurt = false;
-                      }
-            }
-
-        } else 
-        {
-            if(WaitedTimer != OrigWaitedTime)
-            {
-                WaitedTimer = OrigWaitedTime;
-            }
-        }
-
     }
 
     //Restoring castle health.
@@ -328,8 +304,33 @@ public class GameManager : MonoBehaviour
         CastleHealth -= num;
     }
 
-    public void StartRestingState()
+    //A function to alot a certain time after the player hasn't gotten hurt to begin to heal and gain health.
+    void PlayerWaitedRestore()
     {
-        waveState = WaveState.Resting;
+        if (plyrHurt == true)
+        {
+            if(WaitedTimer > 0)
+            {
+                WaitedTimer -= Time.deltaTime;
+            } 
+            else 
+            {
+                      if(PlayerHealth < 100)
+                      {
+                        PlayerHealth += 0.5f;
+                      } else 
+                      {
+                          plyrHurt = false;
+                      }
+            }
+        } 
+        else 
+        {
+            if(WaitedTimer != OrigWaitedTime)
+            {
+                WaitedTimer = OrigWaitedTime;
+            }
+        }
     }
+
 }
