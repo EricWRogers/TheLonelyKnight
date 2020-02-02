@@ -182,13 +182,13 @@ public class UIManager : MonoBehaviour
 
     public void OpenSettings()
     {
-        Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
         settingsPanel.SetActive(true);
     }
     public void ResumeGame()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
         settingsPanel.SetActive(false);
     }
@@ -204,7 +204,7 @@ public class UIManager : MonoBehaviour
     }
     public void StartButton()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         startMenu.SetActive(false);
         hudPanel.SetActive(true);
     }
