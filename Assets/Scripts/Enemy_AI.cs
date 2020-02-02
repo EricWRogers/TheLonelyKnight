@@ -12,29 +12,26 @@ public class Enemy_AI : MonoBehaviour
     GameObject player;                                         
     EnemyHealth enemyHealth;                  
     bool playerInRange;                         
-    float timer;                                
-    float distToPlayer;
-    float minDistPlayer;
-    float multiplyBy;
+    float timer, distToPlayer, minDistPlayer, multiplyBy;
     private NavMeshAgent navAgent;   
-    public Rigidbody Projectile;
-    public GameObject firePoint;
     GameObject castle;
-    public float bulletSpeed;
     public float radius;
     public float force;
     public GameObject particle;
+    BoxCollider box;
 
     private void Awake ()
     {
         
         enemy = this.transform;
+        box = GetComponent<BoxCollider>();
         navAgent = this.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag ("Player");
         castle = GameObject.FindGameObjectWithTag ("Castle");
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator>();
         playerInRange = false;
+
         if(enemyType == 1)
             minDistPlayer = 4f;
         if(enemyType == 2)
@@ -65,20 +62,20 @@ public class Enemy_AI : MonoBehaviour
             navAgent.enabled = false;
         }
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-        if(timer >= timeBetweenAttacks && distToPlayer <= minDistPlayer && enemyHealth.currentHealth > 0 ) 
+        if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0 ) 
         {
             Attack (); 
         }
-        if(enemyType == 2  && distToPlayer <= minDistPlayer)
+        if(enemyType == 2  && playerInRange)
         {
             attackDamage = 15;
             Shoot();
+            if(distToPlayer <= 7) GameManager.Instance.PlayerDamageTaken(attackDamage);
         }
         else 
         {
             particle.SetActive(false);
         }
-
 
    
     }
@@ -88,6 +85,7 @@ public class Enemy_AI : MonoBehaviour
         if(distToPlayer <= minDistPlayer)
         {
             playerInRange = true;
+           
         }
         else
         {
@@ -99,6 +97,13 @@ public class Enemy_AI : MonoBehaviour
         particle.SetActive(true);
     }
 
+    /* void OnTriggerEnter(Collider other) 
+    {
+        if(other.tag == "Player")
+        {
+            GameManager.Instance.PlayerDamageTaken(attackDamage);
+        }
+    } */
     void BlowUp()
     {
         //explosion effect here!!
