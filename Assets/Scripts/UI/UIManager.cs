@@ -31,6 +31,15 @@ public class UIManager : MonoBehaviour
     private float prevPlayerHealth = 100f;
     private float prevCastleHealth = 100f;
 
+    [Header("Settings")]
+    public GameObject settingsPanel;
+
+    [Header("StartMenu")]
+    public GameObject startMenu;
+    public GameObject hudPanel;
+    public GameObject optionsPanel;
+
+
 
 
     // Start is called before the first frame update
@@ -164,11 +173,36 @@ public class UIManager : MonoBehaviour
         }
 
     }
-
-    public void ToastPopUp(float scrapeAmount, string buttonToPress)
+    public void ToastPopUp(float scrapeAmount)
     {
         scrapeRequiredText.text = "" + scrapeAmount;
-        instructionText.text = "Press " + buttonToPress + " to upgrade";
+        instructionText.text = "Press E to upgrade";
         toastOB.SetActive(true);
+    }
+
+    public void OpenSettings()
+    {
+        Time.timeScale = 0;
+        settingsPanel.SetActive(true);
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        settingsPanel.SetActive(false);
+    }
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
+    public void GoToStartMenu()
+    {
+        Time.timeScale = 1;
+        startMenu.SetActive(true);
+        hudPanel.SetActive(false);
+    }
+    public void StartButton()
+    {
+        startMenu.SetActive(false);
+        hudPanel.SetActive(true);
     }
 }
