@@ -154,6 +154,11 @@ PrefabInstance:
       propertyPath: m_ResetingUiUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1979728273}
+    - target: {fileID: 3366952055859923439, guid: e548675e3b0282b468492a87797071a8,
+        type: 3}
+      propertyPath: enemy3
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5249514750265357364, guid: e548675e3b0282b468492a87797071a8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -381,6 +386,11 @@ PrefabInstance:
       value: Test-Castle_Wall
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 7eee3d39e0fb01cd3815caf3c16f1a4a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Castle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2534866581884222612, guid: 7eee3d39e0fb01cd3815caf3c16f1a4a,
         type: 3}
       propertyPath: m_TagString
       value: Castle

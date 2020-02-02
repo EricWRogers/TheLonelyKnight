@@ -13,7 +13,7 @@ public class EnemyHealth : MonoBehaviour
     AudioSource enemyAudio;                   
     ParticleSystem hitParticles;    
     PaintBlood paint;            
-    public MeshCollider meshCollider;  
+    public BoxCollider boxCollider;  
     public Rigidbody rigidbody;   
     public GameObject Scrap;
     NavMeshAgent nav;
@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
         // Setting up the references.
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
-        meshCollider = GetComponent <MeshCollider> ();
+        boxCollider = GetComponent <BoxCollider> ();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         currentHealth = startingHealth;
@@ -80,7 +80,7 @@ public class EnemyHealth : MonoBehaviour
         nav.enabled  = false;
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
         rigidbody.isKinematic  = true;
-        meshCollider.isTrigger = true;
+        boxCollider.isTrigger = true;
         // The enemy should no sink.
         isSinking = true;
         // After 2 seconds destory the enemy.

@@ -11,8 +11,8 @@ public class Enemy_AI : MonoBehaviour
     GameObject player;                                         
     EnemyHealth enemyHealth;                  
     bool playerInRange,castleInRange;                         
-    float distToPlayer,distToCastle, minDistPlayer, multiplyBy;
-    private NavMeshAgent navAgent;   
+    float distToPlayer,distToCastle, minDistCastle, minDistPlayer, multiplyBy;
+    public NavMeshAgent navAgent;   
     GameObject castle;
     public float radius;
     public float force;
@@ -21,7 +21,6 @@ public class Enemy_AI : MonoBehaviour
     {
         
         enemy = this.transform;
-        navAgent = this.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag ("Player");
         castle = GameObject.FindGameObjectWithTag ("Castle");
         enemyHealth = GetComponent<EnemyHealth>();
@@ -29,6 +28,7 @@ public class Enemy_AI : MonoBehaviour
         playerInRange = false;
         castleInRange = false;
         minDistPlayer = 7f;
+        minDistCastle = radius;
 
     }
     void Update ()
@@ -63,7 +63,7 @@ public class Enemy_AI : MonoBehaviour
             playerInRange = false;
         }
 
-        if(distToCastle <= minDistPlayer)
+        if(distToCastle <= minDistCastle)
         {
             castleInRange = true;
         }
@@ -78,21 +78,19 @@ public class Enemy_AI : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position,radius);
         foreach(Collider nearbyObject in colliders)
         {
-            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-            if(rb!= null)
-            {
-                rb.AddExplosionForce(force,transform.position,radius);
-            }
             if(nearbyObject.transform.tag == "Player")
             {
+                Debug.Log("explosion on player");
                 GameManager.Instance.PlayerDamageTaken(attackDamage);
             }
             if(nearbyObject.transform.tag == "Castle")
             {
+                Debug.Log("explosion on castle");
                 GameManager.Instance.CastleDamageTaken(attackDamage);
             }
         }
         Explode();
+        Debug.Log("explosion in the castle");
         enemyHealth.TakeDamage(enemyHealth.currentHealth);
     }
     void Explode()
