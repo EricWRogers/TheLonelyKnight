@@ -40,8 +40,11 @@ public class GameManager : MonoBehaviour
     public float castleHealth { get { return CastleHealth; } }
 
     //Creates a new event.
-    public UnityEvent m_Death = new UnityEvent();
-    public UnityEvent m_Messages = new UnityEvent();
+    
+    [SerializeField]
+    public OnDeath onDeath;
+    [SerializeField]
+    public RestingWaveState restingWaveStateActive;
 
     public UnityEvent m_ResetingUiUpdate = new UnityEvent();
 
@@ -116,8 +119,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //Listeners for generic functions
-        m_Death.AddListener(MyAction);
-        m_Messages.AddListener(MyMessages);
+        
 
         waveNumber = 1;
         PlayerHealth = 100f;
@@ -170,6 +172,7 @@ public class GameManager : MonoBehaviour
     //The Resting State of the game.
     void StateResting()
     {
+        restingWaveStateActive.Invoke();
         WTimer -= Time.deltaTime;
         
         if (WTimer < 0)
@@ -293,7 +296,7 @@ public class GameManager : MonoBehaviour
             PlayerHealth -= num;
         }else
         {
-            m_Death.Invoke();
+            onDeath.Invoke();
         }
         plyrHurt = true;
     }
@@ -316,7 +319,7 @@ public class GameManager : MonoBehaviour
         if(num > castleHealth)
         {
             //GameOver
-            m_Death.Invoke();
+            onDeath.Invoke();
 
         } else if(castleHealth > 0){
             CastleHealth -= num;
@@ -353,3 +356,7 @@ public class GameManager : MonoBehaviour
     }
 
 }
+[System.Serializable]
+public class OnDeath : UnityEngine.Events.UnityEvent{ }
+[System.Serializable]
+public class RestingWaveState : UnityEngine.Events.UnityEvent{ }

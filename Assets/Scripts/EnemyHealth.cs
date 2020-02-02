@@ -25,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Start ()
     {
+        paint= GetComponent<PaintBlood>();
         // Setting up the references.
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
@@ -54,7 +55,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage (int amount)
     {
         currentHealth -= amount;
-        paint.Paint(transform.position);
+        paint.Paint(this.transform.position);
         if(currentHealth <= 0)
         {
             Instantiate(Scrap,this.transform, true);
@@ -67,8 +68,6 @@ public class EnemyHealth : MonoBehaviour
     void Death ()
     {
         GameManager.Instance.OnAIDeath();
-        meshCollider.isTrigger = true;
-        // The enemy is dead.
         isDead = true;
         StartSinking();
         // Turn the collider into a trigger so shots can pass through it.
@@ -88,6 +87,7 @@ public class EnemyHealth : MonoBehaviour
         nav.enabled  = false;
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
         rigidbody.isKinematic  = true;
+        meshCollider.isTrigger = true;
         // The enemy should no sink.
         isSinking = true;
         // After 2 seconds destory the enemy.

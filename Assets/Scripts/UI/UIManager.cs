@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 using TMPro;
 public class UIManager : MonoBehaviour
 {
@@ -23,12 +24,9 @@ public class UIManager : MonoBehaviour
     [Header("Health Bars")]
     public Animator playerHealthBarAnim;
     public Animator castleHealthBarAnim;
-    [SerializeField]
-    private GameObject[] playerHealthBarImages;
-    [SerializeField]
-    private GameObject[] castleHealthBarImages;
-    [SerializeField]
-    private Color[] healthColors;
+    public GameObject[] playerHealthBarImages;
+    public GameObject[] castleHealthBarImages;
+    public Color[] healthColors;
     private float prevPlayerHealth = 100f;
     private float prevCastleHealth = 100f;
 
@@ -43,6 +41,9 @@ public class UIManager : MonoBehaviour
     public GameObject startMenu;
     public GameObject hudPanel;
     public GameObject optionsPanel;
+
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
 
     public static UIManager Instance { get; private set; } = null;
 
@@ -73,13 +74,13 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.playrHealth != prevPlayerHealth)
         {
             playerHealthText.text = "" + GameManager.Instance.playrHealth;
-            //PlayerHealthBar(GameManager.Instance.playrHealth);
+            PlayerHealthBar(GameManager.Instance.playrHealth);
         }
 
         if (GameManager.Instance.castleHealth != prevCastleHealth)
         {
-            castleHealthText.text = "" + GameManager.Instance.castleHealth;
-            //CastleHealthBar(GameManager.Instance.castleHealth);
+            //castleHealthText.text = "" + GameManager.Instance.castleHealth;
+            CastleHealthBar(GameManager.Instance.castleHealth);
         }
         if (GameManager.Instance.scrapCount != prevScrapAmount)
         {
@@ -106,6 +107,11 @@ public class UIManager : MonoBehaviour
             {
                 waveText.text = "Wave " + GameManager.Instance.WaveNumber + " incoming... " + (int)GameManager.Instance.WTimer;
             }
+            if (GameManager.Instance.WaveStateHolder == GameManager.WaveState.WaveStart)
+            {
+                waveCountDown = false;
+                wavePanel.SetActive(false);
+            }
         }
     }
 
@@ -126,11 +132,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[0];
+                //playerHealthBarImages[i].tintColor = healthColors[0];
 
                 if (i > avaibleBars)
                 {
                     playerHealthBarImages[i].SetActive(false);
+                }
+                else
+                {
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
 
@@ -139,11 +149,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[1];
+                //playerHealthBarImages[i].tintColor = healthColors[1];
 
                 if (i > avaibleBars)
                 {
                     playerHealthBarImages[i].SetActive(false);
+                }
+                else
+                {
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -151,11 +165,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < playerHealthBarImages.Length; i++)
             {
-                playerHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[2];
+                //playerHealthBarImages[i].tintColor = healthColors[2];
 
                 if (i > avaibleBars)
                 {
                     playerHealthBarImages[i].SetActive(false);
+                }
+                else
+                {
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -179,11 +197,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[0];
+                //castleHealthBarImages[i].tintColor = healthColors[0];
 
                 if (i > avaibleBars)
                 {
                     castleHealthBarImages[i].SetActive(false);
+                }
+                else
+                {
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
 
@@ -192,11 +214,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[1];
+                //castleHealthBarImages[i].tintColor = healthColors[1];
 
                 if (i > avaibleBars)
                 {
                     castleHealthBarImages[i].SetActive(false);
+                }
+                else
+                {
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -204,11 +230,15 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < castleHealthBarImages.Length; i++)
             {
-                castleHealthBarImages[i].transform.GetComponent<Image>().tintColor = healthColors[2];
+                //castleHealthBarImages[i].tintColor = healthColors[2];
 
                 if (i > avaibleBars)
                 {
                     castleHealthBarImages[i].SetActive(false);
+                }
+                else
+                {
+                    playerHealthBarImages[i].SetActive(true);
                 }
             }
         }
@@ -244,10 +274,8 @@ public class UIManager : MonoBehaviour
     }
     public void GoToStartMenu()
     {
-        alreadyPressed = 0;
-        startMenu.SetActive(true);
-        hudPanel.SetActive(false);
-        settingsPanel.SetActive(false);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
     public void StartButton()
     {
@@ -257,10 +285,17 @@ public class UIManager : MonoBehaviour
         startMenu.SetActive(false);
         hudPanel.SetActive(true);
     }
+    public void GameOver()
+    {
+        gameOverPanel.SetActive(true);
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
+    }
 
     public void WaveIncoming()
     {
         waveCountDown = true;
         wavePanel.SetActive(true);
     }
+
 }

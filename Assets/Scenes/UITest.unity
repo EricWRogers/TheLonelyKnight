@@ -325,15 +325,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09582d8c189fda589b0783f682bd885c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WTimer: 10
+  SpawnWidth: 75
+  SpawnHeight: 25
   center: {fileID: 0}
   enemy: {fileID: 0}
   enemy2: {fileID: 0}
   enemy3: {fileID: 0}
-  WTimer: 10
-  waveState: 0
-  SpawnCap: 40
-  PlayerHealth: 0
-  CastleHealth: 0
   m_Death:
     m_PersistentCalls:
       m_Calls: []
@@ -343,6 +341,10 @@ MonoBehaviour:
   m_ResetingUiUpdate:
     m_PersistentCalls:
       m_Calls: []
+  SpawnCap: 40
+  waveState: 0
+  PlayerHealth: 0
+  CastleHealth: 0
 --- !u!4 &1769988452
 Transform:
   m_ObjectHideFlags: 0
