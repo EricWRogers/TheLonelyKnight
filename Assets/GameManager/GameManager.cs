@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     //Wave Timer for counting down the 2 minutes inbetween waves.
     public float WTimer = 10;
 
+    //To adjust the width and height of the spawn.
+    public int SpawnWidth = 75, SpawnHeight = 25;
+
     //A transform for AI placement purposes.
     public Transform center;
 
@@ -207,17 +210,17 @@ public class GameManager : MonoBehaviour
             switch (RndEnemy)
             {
                 case 1:
-                    TempPosition = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+                    TempPosition = center.position + new Vector3(Random.Range(-SpawnHeight, SpawnHeight), 0, Random.Range(-SpawnWidth, SpawnWidth));
                     Instantiate(enemy, TempPosition, Quaternion.identity);
                     break;
 
                 case 2:
-                    TempPositionTwo = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+                    TempPositionTwo = center.position + new Vector3(Random.Range(-SpawnHeight, SpawnHeight), 0, Random.Range(-SpawnWidth, SpawnWidth));
                     Instantiate(enemy2, TempPositionTwo, Quaternion.identity);
                     break;
 
                 case 3:
-                    TempPositionThree = center.position + new Vector3(Random.Range(-25.0f, 25.0f), 0, Random.Range(-75.0f, 75.0f));
+                    TempPositionThree = center.position + new Vector3(Random.Range(-SpawnHeight, SpawnHeight), 0, Random.Range(-SpawnWidth, SpawnWidth));
                     Instantiate(enemy3, TempPositionThree, Quaternion.identity);
                     break;
 
