@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
     Animator anim;                       
     AudioSource enemyAudio;                   
     ParticleSystem hitParticles;                
-    public CapsuleCollider capsuleCollider;  
+    public MeshCollider meshCollider;  
     public Rigidbody rigidbody;   
     public GameObject Scrap;
     NavMeshAgent nav;
@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("Starting UP enemy Health");
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
-        capsuleCollider = GetComponent <CapsuleCollider> ();
+        meshCollider = GetComponent <MeshCollider> ();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         currentHealth = startingHealth;
@@ -71,7 +71,7 @@ public class EnemyHealth : MonoBehaviour
     {
         Instantiate(Scrap,this.transform, true);
         GameManager.Instance.OnAIDeath();
-        capsuleCollider.isTrigger = true;
+        meshCollider.isTrigger = true;
         // The enemy is dead.
         isDead = true;
         StartSinking();
